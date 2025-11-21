@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adeala – Våra Partner</title>
+
+  <!-- Frameworks & Global Styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body class="font-[Inter] bg-white text-gray-900">
+
+  <!-- Header Placeholder (same as code 1) -->
+  <div id="header-placeholder"></div>
+
+
+  <!-- Spacer below header -->
+  <div class="pt-48"></div>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <h1 class="text-6xl font-extrabold text-blue-1000 mb-10 text-center">
+      Våra Samarbetspartners
+    </h1>
+
+    <div class="flex flex-wrap justify-start gap-12 items-center">
+      <img src="images\tele2.jpg" class="h-32 rounded shadow-sm hover:shadow-md transition cursor-pointer" alt="Tele2 logotyp" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Telia.svg/1200px-Telia.svg.png" class="h-32 hover:brightness-110 transition cursor-pointer" alt="Telia logotyp" />
+      <img src="https://images.ctfassets.net/d48yc3frismn/2alkLOowwaSm0LJYWChQtC/0c972d418d07c5e003fa9af900385d6b/open_graph_telenor_foretag_1200x628.jpg" class="h-32 rounded shadow-sm hover:shadow-md transition cursor-pointer" alt="Telenor logotyp" />
+      <img src="https://mobilt-bredband.net/wp-content/uploads/2025/03/unnamed.png" class="h-32 hover:brightness-110 transition cursor-pointer" alt="Halebop logotyp" />
+      <img src="https://www.mobiltelefoni.se/cms2/wp-content/uploads/2018/09/tre-logo-1024x600.jpg" class="h-32 hover:brightness-110 transition cursor-pointer" alt="Tre logotyp" />
+      <img src="https://detailproduktion.se/wp-content/uploads/2014/04/ica-maxi-stormarknad-logo.png" class="h-32 hover:brightness-110 transition cursor-pointer" alt="ICA Maxi logotyp" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/MIO_Logo.svg/2560px-MIO_Logo.svg.png" class="h-32 hover:brightness-110 transition cursor-pointer" alt="MIO logotyp" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1280px-Amazon_logo.svg.png" class="h-32 hover:brightness-110 transition cursor-pointer" alt="Amazon logotyp" />
+      <img src="https://via.tt.se/data/images/00805/2913a401-6a83-4295-9dba-619a02bd438d.jpg" class="h-32 rounded shadow-sm hover:shadow-md transition cursor-pointer" alt="Tele2 logotyp" />
+    </div>
+  </main>
+
+
+  <!-- Load shared header/footer/chat (EXACT same loader as Code 1) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+
+      // Load header
+      document.getElementById("header-placeholder").innerHTML =
+        await fetch("partials/header.html").then(r => r.text());
+
+      // Load chat
+      document.body.insertAdjacentHTML(
+        "beforeend",
+        await fetch("partials/chat.html").then(r => r.text())
+      );
+
+      // Load footer
+      document.body.insertAdjacentHTML(
+        "beforeend",
+        await fetch("partials/footer.html").then(r => r.text())
+      );
+
+      // Load global JS
+      const script = document.createElement("script");
+      script.src = "assets/scripts.js";
+      script.defer = true;
+      document.body.appendChild(script);
+    });
+  </script>
+
+</body>
+</html>

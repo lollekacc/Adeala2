@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adeala – Bredband</title>
+
+  <!-- Frameworks & Global Styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body class="min-h-screen font-[Inter] bg-white text-gray-900">
+
+  <!-- Header Placeholder -->
+  <div id="header-placeholder"></div>
+
+  <!-- HERO (Brand-Matched) -->
+  <section class="relative w-full h-[380px] overflow-hidden">
+    <img
+      src="https://media.istockphoto.com/id/691430076/photo/wi-fi-wireless-internet-router-on-dark-background.jpg?s=612x612&w=0&k=20&c=gX4k36hW_kPwPGX5BNmqzygBsc9KLBJKf-O7S8CeHs4="
+      alt="Router"
+      class="w-full h-full object-cover opacity-80"
+    />
+
+    <!-- Gradient overlay (same as homepage) -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#004C9E]/50 to-[#0C4A3C]/70"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="text-center px-6">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white drop-shadow-xl">
+          Hitta rätt bredband – snabbt och enkelt
+        </h1>
+        <p class="mt-4 text-white/90 text-lg max-w-2xl mx-auto">
+          Fyll i din adress för att se vilka operatörer som levererar till just dig.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SEARCH SECTION (Brand-Unified) -->
+  <section class="py-16">
+    <div class="max-w-xl mx-auto bg-white p-10 rounded-2xl shadow-md">
+
+      <h2 class="text-3xl font-bold text-center mb-8 text-[#0C4A3C]">
+        Sök täckning på din adress
+      </h2>
+
+      <div class="flex gap-4">
+        <input
+          id="addressInput"
+          type="text"
+          placeholder="ex. Storgatan 3, Stockholm"
+          class="flex-1 border border-gray-300 px-4 py-3 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#004C9E]"
+        />
+
+        <button id="searchBtn" class="adeala-btn px-8">
+          Sök
+        </button>
+      </div>
+
+      <p id="searchMsg" class="text-center mt-4 text-gray-700"></p>
+
+    </div>
+  </section>
+
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+
+  <!-- SEARCH LOGIC -->
+  <script>
+    document.getElementById("searchBtn").addEventListener("click", () => {
+      const address = document.getElementById("addressInput").value.trim();
+      const msg = document.getElementById("searchMsg");
+
+      if (!address) {
+        msg.textContent = "⚠️ Ange en giltig adress för att söka täckning.";
+        msg.className = "text-red-600 mt-3 text-center";
+        return;
+      }
+
+      const suggestions = [
+        "Telia fiber finns tillgängligt ✅",
+        "Tele2 bredband finns här 🚀",
+        "Telenor erbjuder hög hastighet på din adress 🌐"
+      ];
+
+      msg.className = "text-green-600 mt-3 text-center font-medium";
+      msg.textContent = `✅ ${suggestions[Math.floor(Math.random() * suggestions.length)]} (${address})`;
+    });
+  </script>
+
+
+  <!-- Load header, chat, footer (same logic as homepage) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+
+      // HEADER
+      document.getElementById("header-placeholder").innerHTML =
+        await fetch("partials/header.html").then(r => r.text());
+
+      // CHAT
+      document.body.insertAdjacentHTML(
+        "beforeend",
+        await fetch("partials/chat.html").then(r => r.text())
+      );
+
+      // FOOTER
+      document.body.insertAdjacentHTML(
+        "beforeend",
+        await fetch("partials/footer.html").then(r => r.text())
+      );
+
+      // MAIN SCRIPT
+      const script = document.createElement("script");
+      script.src = "assets/scripts.js";
+      script.defer = true;
+      document.body.appendChild(script);
+    });
+  </script>
+
+</body>
+</html>

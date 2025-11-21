@@ -1,0 +1,745 @@
+/* GLOBAL BRAND COLORS */
+:root {
+  --adeala-green: #0F4C3A;
+  --adeala-teal:  #0A7C66;
+  --adeala-blue:  #0B4E9A;
+  --adeala-beige: #F5EEDF;
+  --adeala-dark:  #0F2D24;
+}
+
+/* GLOBAL RESETS */
+body {
+  background-color: var(--adeala-beige);
+  color: var(--adeala-dark);
+  font-family: 'Inter', sans-serif;
+}
+
+/* GLOBAL CARD STYLE */
+.adeala-card {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
+}
+
+.adeala-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+/* GLOBAL BUTTON STYLE */
+.adeala-btn {
+  background: var(--adeala-green);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;      /* enable shine layer */
+  overflow: hidden;        /* clip shine to button */
+  z-index: 1;
+  transition: background 0.25s ease;
+}
+
+/* Normal hover color */
+.adeala-btn:hover {
+  background: var(--adeala-teal);
+}
+
+/* Shine layer */
+.adeala-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -180%;
+  width: 150%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 45%,
+    transparent 80%
+  );
+
+  transform: skewX(-20deg);
+  z-index: 2;             /* above background, below text */
+  pointer-events: none;
+  transition: all 0.7s ease;
+}
+
+/* Shine animation */
+.adeala-btn:hover::after {
+  left: 180%;
+}
+
+
+/* HERO OVERLAY */
+.hero-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(15, 76, 58, 0.35),
+    rgba(10, 124, 102, 0.35)
+  );
+}
+
+/* ADEALA BRAND BUTTON */
+.adeala-btn {
+  background: linear-gradient(90deg, #004C9E, #0C4A3C);
+  color: white;
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.25s ease-in-out;
+}
+
+/* Hover effect */
+.adeala-btn:hover {
+  background: linear-gradient(90deg, #003B7A, #0A3C32);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+/* Secondary transparent button */
+.adeala-btn-secondary {
+  background: rgba(255, 255, 255, 0.18);
+  color: white;
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(5px);
+  transition: all 0.25s ease;
+
+  position: relative;     /* enable shine */
+  overflow: hidden;       /* clip shine */
+  z-index: 1;
+}
+
+.adeala-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.27);
+  transform: translateY(-2px);
+}
+
+/* Shine layer */
+.adeala-btn-secondary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -180%;
+  width: 150%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 45%,
+    transparent 80%
+  );
+
+  transform: skewX(-20deg);
+  z-index: 2;
+  pointer-events: none;
+  transition: all 0.7s ease;
+}
+
+/* Shine animation */
+.adeala-btn-secondary:hover::after {
+  left: 180%;
+}
+
+/* =========================================================
+   SCROLL ADS — CLEAN 2-COLUMN GRID
+========================================================= */
+
+.scroll-ads {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 4rem 0;  /* no horizontal padding */
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+}
+
+
+/* Mobile stacking */
+@media (max-width: 900px) {
+  .scroll-ads {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================================
+   AD CONTAINER CARD
+========================================================= */
+
+.ad-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;         /* ensures equal height */
+  justify-content: space-between;
+  gap: 2rem;
+
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+  min-height: 360px;
+  height: 100%;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease-out;
+}
+
+/* fade-in when visible */
+.ad-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   IMAGE — PERFECT SIZING
+========================================================= */
+
+.ad-image {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+
+  max-height: 400px;           /* keeps images uniform */
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+
+/* =========================================================
+   TEXT SECTION — BALANCED SPACING
+========================================================= */
+
+.ad-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;  /* even spacing */
+  gap: 1.2rem;
+  padding: 0.5rem 0;
+}
+
+/* Title */
+.ad-text h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #0C4A3C;
+}
+
+/* Description */
+.ad-text p {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+
+/* =========================================================
+   TAG LABEL
+========================================================= */
+
+.ad-tag {
+  background: #0C4A3C;
+  color: white;
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  display: inline-block;
+  width: fit-content;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.ad-btn {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 1rem;
+}
+/* ================================
+   MINI QUIZ WRAPPER
+================================= */
+
+section.quiz-box {
+  width: 100%;
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+
+/* QUIZ OPTION BUTTON */
+.quiz-option {
+  background: #f7f7f7;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 1.4rem 1rem;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  color: #333;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  position: relative;    /* enable shine */
+  overflow: hidden;      /* clip shine */
+  z-index: 1;
+}
+
+/* Shine effect layer */
+.quiz-option::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -180%;
+  width: 150%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 45%,
+    transparent 80%
+  );
+
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 2;
+  transition: all 0.7s ease;
+}
+
+/* Hover — shine + lift */
+.quiz-option:hover::after {
+  left: 180%;
+}
+
+.quiz-option:hover {
+  background: #eef6ff;
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+}
+
+/* Active click feedback */
+.quiz-option:active {
+  transform: scale(0.96);
+}
+
+
+/* ================================
+   QUIZ RESULT BOX
+================================= */
+
+#quiz-result {
+  background: #eef6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 18px;
+  padding: 1.8rem;
+  animation: fadeIn 0.35s ease-out;
+}
+
+#quiz-result h3 {
+  color: #1e3a8a;
+}
+
+#quiz-link {
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+
+/* ================================
+   FADE-IN ANIMATION
+================================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* ================================
+   LIGHT REFLECTION SWIPE EFFECT
+================================= */
+
+.quiz-option {
+  position: relative;
+  overflow: hidden;
+}
+
+.quiz-option::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: all 0.6s ease;
+}
+
+.quiz-option:hover::after {
+  left: 150%;
+}
+.quiz-option {
+  position: relative;
+  overflow: hidden;
+  background: #f7f7f7;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 1.4rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 1;
+}
+
+/* Shine layer */
+.quiz-option::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -180%;
+  width: 150%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 45%,
+    transparent 80%
+  );
+
+  transform: skewX(-20deg);
+  z-index: 2;                 /* ABOVE background */
+  pointer-events: none;       /* clicks pass through */
+  transition: all 0.7s ease;  /* smooth */
+}
+
+/* Hover trigger */
+.quiz-option:hover::after {
+  left: 180%;
+}
+
+/* Optional hover lift */
+.quiz-option:hover {
+  background: #eef6ff;
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+}
+/* NAVBAR LINK BRAND STYLE */
+nav a {
+  color: #0C4A3C; /* text stays readable on gradient navbar */
+  font-weight: 600;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+/* Underline hover with logo gradient */
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #004C9E, #0C4A3C); /* logo gradient */
+  transition: width 0.3s ease;
+  border-radius: 999px;
+}
+
+/* Hover animation */
+nav a:hover::after {
+  width: 100%;
+}
+nav a:hover {
+  background: linear-gradient(90deg, #004C9E, #0C4A3C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* ================================
+   BELÖNINGAR – HERO SECTION
+================================ */
+.beloning-hero {
+  width: 100%;
+  padding: 6rem 2rem;
+  text-align: center;
+  background: linear-gradient(90deg, #004C9E, #0C4A3C);
+  color: white;
+  border-bottom: 4px solid rgba(255, 255, 255, 0.2);
+}
+
+.beloning-hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: white;
+}
+
+.beloning-hero p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+/* ================================
+   REWARD GRID
+================================ */
+.content-wrapper {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+}
+
+.rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+}
+
+/* ================================
+   REWARD CARD (Brand matched)
+================================ */
+.reward-card {
+  background: white;
+  border-radius: 18px;
+  padding: 2rem;
+  border: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.reward-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+
+/* Card logo */
+.reward-logo {
+  width: 110px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto 1.5rem;
+}
+
+/* Title */
+.reward-card h3 {
+  font-size: 1.3rem;
+  color: #0C4A3C;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+/* Text */
+.reward-card p {
+  color: #333;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.45;
+}
+
+/* ================================
+   REWARD BUTTON
+   (Uses Adeala shine animation)
+================================ */
+.reward-link {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  border-radius: 10px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(90deg, #004C9E, #0C4A3C);
+  text-decoration: none;
+  transition: transform 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Hover lift */
+.reward-link:hover {
+  transform: translateY(-2px);
+}
+
+/* Shine effect */
+.reward-link::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -160%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 45%,
+    transparent 80%
+  );
+  transform: skewX(-20deg);
+  transition: all 0.7s ease;
+}
+
+.reward-link:hover::after {
+  left: 160%;
+}
+/* === ADEALA QUIZ BRAND TITLES (Style A) === */
+.quiz-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0C4A3C; /* Adeala dark green */
+  margin-bottom: 0.5rem;
+}
+
+/* Make the question cards match Adeala style more closely */
+.quiz-card {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+/* Make submit buttons use Adeala button styles */
+#submitMobil,
+#submitFamilj {
+  background: linear-gradient(90deg, #004C9E, #0C4A3C) !important;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.85rem 2rem;
+}
+
+#submitMobil:hover,
+#submitFamilj:hover {
+  background: linear-gradient(90deg, #003B7A, #0A3C32) !important;
+  transform: translateY(-2px);
+}
+/* QUIZ SUBMIT BUTTONS — ADEALA GREEN */
+.quiz-submit {
+  background: #0C4A3C !important;
+  color: white !important;
+  padding: 0.85rem 2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.25s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Hover effect */
+.quiz-submit:hover {
+  background: #0A3C32 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+/* Shine layer */
+.quiz-submit::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -160%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.55) 45%,
+      transparent 80%
+  );
+  transform: skewX(-20deg);
+  transition: all 0.7s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.quiz-submit:hover::after {
+  left: 160%;
+}
+/* =======================================
+   QUIZ OPTIONS — ADEALA GREEN THEME
+======================================= */
+
+/* Hover highlight */
+.quiz-option:hover {
+  background: #e8f4ef !important;         /* soft green tint */
+  border-color: #0C4A3C !important;
+  transform: translateY(-2px);
+}
+
+/* Active (selected answer) */
+.quiz-option.active {
+  background: #0C4A3C !important;         /* brand green */
+  color: white !important;
+  border-color: #0A3C32 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Keep shine effect on hover */
+.quiz-option.active:hover::after {
+  left: 180%;
+}
+.quiz-option.active {
+  background: linear-gradient(to right, #004C9E, #0C4A3C) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: transparent !important;
+}
+.offer-choice.active {
+  background: linear-gradient(to right, #004C9E, #0C4A3C) !important;
+  color: white !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+#chatBox {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: flex !important;
+  z-index: 999999 !important;
+}
