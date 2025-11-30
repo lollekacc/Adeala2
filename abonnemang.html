@@ -309,16 +309,16 @@ document.getElementById("beloningBtn").onclick = () => {
 /******************************
  BACKEND API CALL
 ******************************/
-async function loadOffers(data) {
+async function loadOffers(filterData) {
   try {
-    const res = await fetch("/api/search", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
+    // Load the static JSON file
+    const res = await fetch("plans.json");
+    const allPlans = await res.json();
 
-    const offers = await res.json();
-    renderOffers(offers.results ?? offers);
+    // Filter on the frontend instead of backend
+    const filtered = applyFilters(allPlans, filterData);
+
+    renderOffers(filtered);
   } catch (e) {
     console.error(e);
     renderOffers([]);
@@ -327,6 +327,32 @@ async function loadOffers(data) {
   offersSection.classList.remove("hidden");
   offersSection.scrollIntoView({ behavior: "smooth" });
 }
+function applyFilters(allPlans, data) {
+  return allPlans.filter(p => {
+
+    // MATCH CATEGORY
+    if (data.category && p.category !== data.category)
+      return false;
+
+    // MATCH OPERATOR
+    if (data.preferredOperator && p.operator !== data.preferredOperator)
+      return false;
+
+    // MATCH BUDGET
+    if (data.budget && p.price > data.budget)
+      return false;
+
+    // MATCH DATA NEED (low / medium / high)
+    if (data.dataNeed) {
+      if (data.dataNeed === "low" && p.dataAmount > 10) return false;
+      if (data.dataNeed === "medium" && p.dataAmount > 50) return false;
+      if (data.dataNeed === "high" && p.dataAmount < 100) return false;
+    }
+
+    return true;
+  });
+}
+
 
 /******************************
  QUIZ BUTTON STYLE
@@ -572,3 +598,4 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
