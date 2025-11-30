@@ -312,7 +312,7 @@ document.getElementById("beloningBtn").onclick = () => {
 async function loadOffers(filterData) {
   try {
     // Load the static JSON file
-    const res = await fetch("plans.json");
+    const res = await fetch("data/plans.json");
     const allPlans = await res.json();
 
     // Filter on the frontend instead of backend
@@ -598,4 +598,5 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
