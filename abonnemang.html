@@ -330,22 +330,23 @@ async function loadOffers(filterData) {
 function applyFilters(allPlans, data) {
   return allPlans.filter(p => {
 
-    // MATCH CATEGORY
-    if (data.category && p.category !== data.category)
+    // CATEGORY MATCH
+    if (data.category && p.category !== data.category) 
       return false;
 
-    // MATCH OPERATOR
+    // OPERATOR MATCH
     if (data.preferredOperator && p.operator !== data.preferredOperator)
       return false;
 
-    // MATCH BUDGET
-    if (data.budget && p.price > data.budget)
+    // PRICE MATCH (uses first price in array)
+    const lowestPrice = p.prices ? p.prices[0] : p.price;
+    if (data.budget && lowestPrice > data.budget)
       return false;
 
-    // MATCH DATA NEED (low / medium / high)
+    // DATA NEED MATCH
     if (data.dataNeed) {
       if (data.dataNeed === "low" && p.dataAmount > 10) return false;
-      if (data.dataNeed === "medium" && p.dataAmount > 50) return false;
+      if (data.dataNeed === "medium" && (p.dataAmount < 10 || p.dataAmount > 50)) return false;
       if (data.dataNeed === "high" && p.dataAmount < 100) return false;
     }
 
@@ -598,5 +599,6 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
 
