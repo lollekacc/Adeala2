@@ -311,7 +311,7 @@ document.getElementById("beloningBtn").onclick = () => {
 ******************************/
 async function loadOffers() {
   try {
-    const res = await fetch("/data/plans.json");
+    const res = await fetch("data/plans.json");
     const offers = await res.json();
 
     renderOffers(offers); // your JSON must be a simple array
@@ -569,6 +569,7 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
 
 
