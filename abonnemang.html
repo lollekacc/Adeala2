@@ -309,14 +309,34 @@ document.getElementById("beloningBtn").onclick = () => {
 /******************************
  BACKEND API CALL
 ******************************/
-async function loadOffers() {
+async function loadOffers(filters) {
   try {
-    const res = await fetch("./data/offers.json");
-    const offers = await res.json();
+    const res = await fetch("data/plans.json");
+    const allOffers = await res.json();
+
+    // FILTER OFFERS BASED ON QUIZ
+    let offers = allOffers.filter(o => {
+
+      // Category match
+      if (filters.category && o.category !== filters.category) return false;
+
+      // Budget match
+      if (filters.budget && o.prices && o.prices[0] > filters.budget) return false;
+
+      // Operator preference
+      if (filters.preferredOperator && filters.preferredOperator !== "" && o.operator !== filters.preferredOperator)
+        return false;
+
+      return true;
+    });
+
+    // Limit to 3 results
+    offers = offers.slice(0, 3);
 
     renderOffers(offers);
-  } catch (e) {
-    console.error(e);
+
+  } catch (err) {
+    console.error(err);
     renderOffers([]);
   }
 
@@ -560,6 +580,7 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
 
 
