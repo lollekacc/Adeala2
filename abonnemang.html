@@ -311,12 +311,20 @@ document.getElementById("beloningBtn").onclick = () => {
 ******************************/
 async function loadOffers() {
   try {
-    const res = await fetch("data/plans.json");
+    const res = await fetch("./data/plans.json");
+    if (!res.ok) throw new Error("JSON not found");
+
     const offers = await res.json();
 
-    renderOffers(offers); // your JSON must be a simple array
+    if (!Array.isArray(offers)) {
+      console.error("JSON is not an array:", offers);
+      renderOffers([]);
+      return;
+    }
+
+    renderOffers(offers);
   } catch (e) {
-    console.error(e);
+    console.error("Error loading offers:", e);
     renderOffers([]);
   }
 
@@ -324,15 +332,6 @@ async function loadOffers() {
   offersSection.scrollIntoView({ behavior: "smooth" });
 }
 
-
-/******************************
- QUIZ BUTTON STYLE
-******************************/
-function activateButton(btn) {
-  const card = btn.closest(".quiz-card");
-  card.querySelectorAll(".quiz-option").forEach(x => x.classList.remove("active"));
-  btn.classList.add("active");
-}
 
 /******************************
  MOBIL QUIZ LOGIC
@@ -569,6 +568,7 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
 
 
