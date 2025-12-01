@@ -311,7 +311,7 @@ document.getElementById("beloningBtn").onclick = () => {
 ******************************/
 async function loadOffers(data) {
   try {
-    const res = await fetch("/api/search", {
+    const res = await fetch("/data/offers.json", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
@@ -572,3 +572,4 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
