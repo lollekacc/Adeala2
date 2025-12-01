@@ -75,14 +75,22 @@ Snabbt och enkelt</h2>
 <section class="w-full max-w-5xl mx-auto mt-16 mb-24 p-8 bg-white rounded-2xl shadow-md">
   <h2 class="text-3xl text-center font-bold mb-8 text-gray-800">Vad är viktigast för dig?</h2>
 
-  <div id="quiz-step-1">
-    <div class="grid sm:grid-cols-2 gap-4"> 
-      <button class="quiz-option adeala-btn-secondary" data-answer="pris">💸 Billigast pris</button> 
-      <button class="quiz-option adeala-btn-secondary" data-answer="surf">📶 Mycket surf</button>
-      <button class="quiz-option adeala-btn-secondary" data-answer="familj">👨‍👩‍👧‍👦 Familjeabonnemang</button>
-      <button class="quiz-option adeala-btn-secondary" data-answer="presentkort">🎁 Bonusar & presentkort</button>
-    </div>
+<div id="quiz-step-1">
+  <div class="grid sm:grid-cols-2 gap-4"> 
+    <a href="abonnemang.html?filter=pris" 
+       class="quiz-option adeala-btn-secondary text-center block">💸 Billigast pris</a>
+
+    <a href="abonnemang.html?filter=surf" 
+       class="quiz-option adeala-btn-secondary text-center block">📶 Mycket surf</a>
+
+    <a href="abonnemang.html?filter=familj" 
+       class="quiz-option adeala-btn-secondary text-center block">👨‍👩‍👧‍👦 Familjeabonnemang</a>
+
+    <a href="abonnemang.html?filter=presentkort" 
+       class="quiz-option adeala-btn-secondary text-center block">🎁 Bonusar & presentkort</a>
   </div>
+</div>
+
 
   <div id="quiz-result" class="hidden mt-8 p-6 bg-blue-50 rounded-xl border border-blue-200">
     <h3 class="text-xl font-semibold mb-2">Din rekommendation:</h3>
@@ -133,6 +141,7 @@ Snabbt och enkelt</h2>
 
 </body>
 </html>
+
 
 
 
