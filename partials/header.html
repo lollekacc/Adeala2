@@ -1,49 +1,48 @@
-<!-- TOP STATIC BAR (NOT FIXED) -->
-<div id="topNav"
-     class="w-full bg-white border-b text-sm text-gray-700 z-[60]">
-  <div class="max-w-7xl mx-auto flex items-center gap-6 px-9 py-2">
-
-    <!-- Privat (active) -->
-    <a href="index.html" 
-       class="relative pb-1 text-[#004C9E] font-medium">
-      Privat
-      <span class="absolute left-0 bottom-0 w-full h-[2px] bg-[#004C9E]"></span>
-    </a>
-
-    <!-- Företag link -->
-    <a href="foretag.html" 
-       class="pb-1 hover:text-[#004C9E] transition">
-      Företag
-    </a>
-
-  </div>
-</div>
-
-
-<!-- HEADER (Unified, FIXED below top bar) -->
+<!-- HEADER -->
 <header id="mainHeader"
-        class="fixed top-[40px] left-0 w-full backdrop-blur-sm bg-white/70 shadow-sm z-50 transition-all duration-300">
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md shadow-sm">
+
+  <!-- TOP NAV BAR (Privat / Företag) -->
+  <div id="topBar"
+       class="w-full bg-white border-b text-sm text-gray-700 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex items-center gap-6 px-9 py-2">
+
+      <a href="index.html" class="relative pb-1 text-[#004C9E] font-medium">
+        Privat
+        <span class="absolute left-0 bottom-0 w-full h-[2px] bg-[#004C9E]"></span>
+      </a>
+
+      <a href="foretag.html" class="pb-1 hover:text-[#004C9E] transition">
+        Företag
+      </a>
+
+    </div>
+  </div>
 
   <!-- MAIN HEADER ROW -->
-  <div class="max-w-7xl mx-auto flex items-center justify-between px-9 py-4">
+  <div id="mainRow"
+       class="max-w-7xl mx-auto flex items-center justify-between px-9 py-6 transition-all duration-300">
 
     <!-- Logo -->
     <a href="index.html" class="hover:opacity-80 transition block">
-      <img src="images/Logo.png" alt="Adeala Logo" class="h-24 w-auto">
+      <img id="headerLogo"
+           src="images/Logo.png"
+           class="h-24 w-auto transition-all duration-300"
+           alt="Adeala Logo">
     </a>
 
     <!-- Navigation -->
     <nav class="hidden md:flex space-x-8 text-lg font-medium">
-      <a href="abonnemang.html" class="hover:opacity-70 transition">Abonnemang</a>
-      <a href="bredband.html" class="hover:opacity-70 transition">5G Bredband</a>
-      <a href="partner.html" class="hover:opacity-70 transition">Partner</a>
-      <a href="belöning.html" class="hover:opacity-70 transition">Belöning</a>
-      <a href="om-oss.html" class="hover:opacity-70 transition">Om oss</a>
-      <a href="kundservice.html" class="hover:opacity-70 transition">Kundservice</a>
+      <a href="abonnemang.html">Abonnemang</a>
+      <a href="bredband.html">5G Bredband</a>
+      <a href="partner.html">Partner</a>
+      <a href="belöning.html">Belöning</a>
+      <a href="om-oss.html">Om oss</a>
+      <a href="kundservice.html">Kundservice</a>
     </nav>
 
     <!-- Login -->
-    <a href="login.html" class="hover:opacity-70 transition">
+    <a href="login.html">
       <i class="fas fa-user text-2xl"></i>
     </a>
 
@@ -51,61 +50,68 @@
 
   <!-- PARTNER BAR -->
   <div id="partnerBar"
-       class="max-w-7xl mx-auto px-9 pb-4 flex items-center gap-10">
+       class="max-w-7xl mx-auto px-9 pb-4 flex items-center gap-10 transition-all duration-300">
 
     <p class="uppercase tracking-wide text-green-900 text-sm font-semibold whitespace-nowrap">
       I SAMARBETE MED
     </p>
 
     <div class="flex items-center gap-14">
-      <a href="abonnemang.html?op=Tele2">
-        <img src="images/tele2.jpg" class="partner-logo h-20 transition-all duration-300" alt="Tele2">
-      </a>
-      <a href="abonnemang.html?op=Telia">
-        <img src="images/telia.png" class="partner-logo h-20 transition-all duration-300" alt="Telia">
-      </a>
-      <a href="abonnemang.html?op=Telenor">
-        <img src="images/telenor.jpg" class="partner-logo h-20 transition-all duration-300" alt="Telenor">
-      </a>
-      <a href="abonnemang.html?op=Tre">
-        <img src="images/tre.jpg" class="partner-logo h-20 transition-all duration-300" alt="Tre">
-      </a>
-      <a href="abonnemang.html?op=Halebop">
-        <img src="images/halebop.webp" class="partner-logo h-20 transition-all duration-300" alt="Halebop">
-      </a>
+      <a href="abonnemang.html?op=Tele2"><img src="images/tele2.jpg" class="partner-logo h-20 transition-all duration-300"></a>
+      <a href="abonnemang.html?op=Telia"><img src="images/telia.png" class="partner-logo h-20 transition-all duration-300"></a>
+      <a href="abonnemang.html?op=Telenor"><img src="images/telenor.jpg" class="partner-logo h-20 transition-all duration-300"></a>
+      <a href="abonnemang.html?op=Tre"><img src="images/tre.jpg" class="partner-logo h-20 transition-all duration-300"></a>
+      <a href="abonnemang.html?op=Halebop"><img src="images/halebop.webp" class="partner-logo h-20 transition-all duration-300"></a>
     </div>
-
   </div>
 
 </header>
 
-<!-- Spacer to push content below fixed header -->
-<div class="pt-[300px]"></div>
+<!-- Spacer below header -->
+<div class="pt-[220px]"></div>
 
-<!-- SCRIPT -->
 <script>
-  // Highlight företag when on foretag.html
-  const path = window.location.pathname;
-  if (path.includes("foretag.html")) {
-    const link = document.querySelector('[href="foretag.html"]');
-    if (link) {
-      link.classList.add("text-[#004C9E]", "font-medium", "relative");
-      link.innerHTML += '<span class="absolute left-0 bottom-0 w-full h-[2px] bg-[#004C9E]"></span>';
-    }
-  }
+  const mainHeader = document.getElementById("mainHeader");
+  const topBar = document.getElementById("topBar");
+  const mainRow = document.getElementById("mainRow");
+  const logo = document.getElementById("headerLogo");
+  const partnerLogos = document.querySelectorAll(".partner-logo");
 
-  // Shrink partner logos on scroll
   window.addEventListener("scroll", () => {
-    const logos = document.querySelectorAll(".partner-logo");
-    if (window.scrollY > 10) {
-      logos.forEach(logo => {
-        logo.classList.remove("h-20");
-        logo.classList.add("h-16");
+    if (window.scrollY > 80) {
+
+      // Hide top bar
+      topBar.style.height = "0px";
+      topBar.style.overflow = "hidden";
+      topBar.style.padding = "0px";
+
+      // Shrink main header row
+      mainRow.classList.replace("py-6", "py-2");
+
+      // Shrink logo
+      logo.classList.replace("h-24", "h-16");
+
+      // Shrink partner logos
+      partnerLogos.forEach(logo => {
+        logo.classList.replace("h-20", "h-14");
       });
+
     } else {
-      logos.forEach(logo => {
-        logo.classList.remove("h-16");
-        logo.classList.add("h-20");
+
+      // Restore full top bar
+      topBar.style.height = "";
+      topBar.style.padding = "";
+      topBar.style.overflow = "";
+
+      // Restore main header row
+      mainRow.classList.replace("py-2", "py-6");
+
+      // Restore logo size
+      logo.classList.replace("h-16", "h-24");
+
+      // Restore partner logos
+      partnerLogos.forEach(logo => {
+        logo.classList.replace("h-14", "h-20");
       });
     }
   });
