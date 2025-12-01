@@ -46,9 +46,7 @@
     </div>
   </div>
 
-  <!-- =======================
-       MOBIL QUIZ
-  ======================= -->
+  <!-- MOBIL QUIZ -->
   <section id="mobilQuizSection" class="hidden mt-20 px-10 pb-20">
 
     <h2 class="text-center text-4xl font-bold text-[#0C4A3C] mb-14">
@@ -90,9 +88,7 @@
     </div>
   </section>
 
-  <!-- =======================
-       FAMILJ QUIZ
-  ======================= -->
+  <!-- FAMILJ QUIZ -->
   <section id="familjQuizSection" class="hidden mt-20 px-10 pb-20">
 
     <h2 class="text-center text-4xl font-bold text-[#0C4A3C] mb-14">
@@ -143,79 +139,68 @@
           <button class="quiz-option familj-opt operator" data-answer="Halebop">Halebop</button>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- =======================
-       OFFERS SECTION
-  ======================= -->
+  <!-- OFFERS -->
   <section id="offersSection" class="hidden mt-20 px-10 pb-20">
-  <h2 class="text-center text-4xl font-bold text-[#0C4A3C] mb-14">
-    Aktuella erbjudanden
-  </h2>
+    <h2 class="text-center text-4xl font-bold text-[#0C4A3C] mb-14">Aktuella erbjudanden</h2>
 
-  <!-- FLEX: LEFT (reward) + RIGHT (offers) -->
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-[1800px] mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-[1800px] mx-auto">
 
-    <!-- REWARD (left 1/3) -->
-    <div id="rewardBox"
-     class="border rounded-2xl p-10 shadow bg-white flex flex-col text-center h-fit sticky top-10">
+      <div id="rewardBox"
+           class="border rounded-2xl p-10 shadow bg-white flex flex-col text-center h-fit sticky top-10">
 
-  <p id="rewardValue"
-     class="text-5xl font-extrabold text-[#004C9E] mb-2">
-     1000:–
-  </p>
+        <p id="rewardValue"
+           class="text-5xl font-extrabold text-[#004C9E] mb-2">
+           1000:–
+        </p>
 
-  <p class="text-lg font-semibold text-[#0C4A3C] mb-1">
-    Grattis på ditt VärdeCheck
-  </p>
+        <p class="text-lg font-semibold text-[#0C4A3C] mb-1">
+          Grattis på ditt VärdeCheck
+        </p>
 
-  <button id="beloningBtn" class="w-full adeala-btn text-white text-lg font-semibold py-3 px-6 rounded-xl transition">
-  Välj din belöning
-</button>
+        <button id="beloningBtn" class="w-full adeala-btn text-white text-lg font-semibold py-3 px-6 rounded-xl transition">
+          Välj din belöning
+        </button>
 
+        <div id="rewardContent" class="hidden"></div>
 
-  <!-- Invisible placeholder to avoid JS errors -->
-  <div id="rewardContent" class="hidden"></div>
+      </div>
 
-</div>
+      <div id="offers-container" class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10"></div>
 
-
-
-
-    <!-- OFFERS (right 2/3) -->
-    <div id="offers-container" class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10">
     </div>
 
-  </div>
-  <section id="numberSection" class="hidden mt-20 px-10 pb-20">
-<section id="portNumberSection" class="hidden mt-20 px-10 pb-20">
-  <h2 class="text-center text-3xl font-bold text-[#0C4A3C] mb-10">
-    Fyll i numren som ska flyttas
-  </h2>
+    <section id="numberSection" class="hidden mt-20 px-10 pb-20">
+      <section id="portNumberSection" class="hidden mt-20 px-10 pb-20">
+        <h2 class="text-center text-3xl font-bold text-[#0C4A3C] mb-10">
+          Fyll i numren som ska flyttas
+        </h2>
 
-  <div id="phoneInputsContainer" class="max-w-xl mx-auto flex flex-col gap-6"></div>
+        <div id="phoneInputsContainer" class="max-w-xl mx-auto flex flex-col gap-6"></div>
 
-  <button id="confirmNumbersBtn"
-          class="mt-10 adeala-btn w-full py-4 rounded-xl text-lg">
-    Bekräfta nummer
-  </button>
-</section>
+        <button id="confirmNumbersBtn"
+                class="mt-10 adeala-btn w-full py-4 rounded-xl text-lg">
+          Bekräfta nummer
+        </button>
+      </section>
+    </section>
 
- 
+  </section>
 
-  </div>
-
-</section>
-
-</section>
-
-
-  <!-- =======================
-       JAVASCRIPT
-  ======================= -->
-  
+  <!-- JAVASCRIPT -->
 <script>
+/***********************
+  CUSTOM SCROLL CONTROL
+************************/
+const SCROLL_AMOUNT = 600;
+
+function smoothScrollBy(px = SCROLL_AMOUNT) {
+  window.scrollBy({ top: px, behavior: "smooth" });
+}
+
 /******************************
  LOAD HEADER + FOOTER
 ******************************/
@@ -244,13 +229,13 @@ const offersContainer = document.getElementById("offers-container");
 document.getElementById("startMobilQuiz").onclick = () => {
   familjSection.classList.add("hidden");
   mobilSection.classList.remove("hidden");
-  mobilSection.scrollIntoView({ behavior: "smooth" });
+  smoothScrollBy();
 };
 
 document.getElementById("startFamiljQuiz").onclick = () => {
   mobilSection.classList.add("hidden");
   familjSection.classList.remove("hidden");
-  familjSection.scrollIntoView({ behavior: "smooth" });
+  smoothScrollBy();
 };
 
 /******************************
@@ -311,7 +296,7 @@ document.getElementById("beloningBtn").onclick = () => {
 ******************************/
 async function loadOffers(data) {
   try {
-    const res = await fetch("https://adeala-backend.onrender.com/api/search", {
+    const res = await fetch("/api/search", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
@@ -325,11 +310,7 @@ async function loadOffers(data) {
   }
 
   offersSection.classList.remove("hidden");
-  function scrollToSection(section, offset = -120) {
-  const y = section.getBoundingClientRect().top + window.scrollY + offset;
-  window.scrollTo({ top: y, behavior: "smooth" });
-}
-
+  smoothScrollBy();
 }
 
 /******************************
@@ -405,7 +386,7 @@ function isValidPhone(num) {
 }
 
 /******************************
- STEP-BY-STEP NUMBER FLOW
+ NUMBER FLOW
 ******************************/
 const sectionNumbers = document.getElementById("numberSection");
 const sectionPort = document.getElementById("portNumberSection");
@@ -428,6 +409,7 @@ function startNumberFlow() {
   collectedNumbers = {};
   sectionNumbers.classList.remove("hidden");
   askNextPerson();
+  smoothScrollBy();
 }
 
 function askNextPerson() {
@@ -452,6 +434,7 @@ function askNextPerson() {
 
   phoneInputs.appendChild(wrapper);
   sectionPort.classList.remove("hidden");
+  smoothScrollBy();
 }
 
 function showNumberInput(type) {
@@ -467,7 +450,7 @@ function showNumberInput(type) {
   const input = document.createElement("input");
   input.className = "border p-3 rounded-xl w-full";
   input.placeholder = type === "port" ? "07XXXXXXXX eller +467XXXXXXXX" : "";
-  input.readOnly = type === "new";  // ⭐ FIXEN
+  input.readOnly = type === "new";
 
   phoneInputs.appendChild(label);
   phoneInputs.appendChild(input);
@@ -500,15 +483,15 @@ function showNumberInput(type) {
     if (currentPerson <= totalPeople) askNextPerson();
     else finishNumbers();
   };
-}
 
+  smoothScrollBy();
+}
 
 function finishNumbers() {
   console.log("Alla nummer valda:", collectedNumbers);
 
   questionTitle.textContent = "Sammanfattning";
 
-  // Hämta valt erbjudande
   const chosenOffer = document.querySelector(".offer-choice.active");
   const offerTitle = chosenOffer
     ? chosenOffer.querySelector("h3").textContent
@@ -555,14 +538,12 @@ function finishNumbers() {
 
   btnConfirm.classList.add("hidden");
 
-  // Click → next page
   document.getElementById("goToCheckout").onclick = () => {
-    // Spara datan om du vill använda den på nästa sida:
-    // localStorage.setItem("summary", JSON.stringify(collectedNumbers));
     window.location.href = "signera.html";
   };
-}
 
+  smoothScrollBy();
+}
 
 /******************************
  CHECK IF READY FOR NUMBERS
@@ -573,6 +554,5 @@ function checkGoToNumberStep() {
 
 </script>
 
-  
 </body>
 </html>
