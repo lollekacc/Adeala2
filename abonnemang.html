@@ -311,20 +311,12 @@ document.getElementById("beloningBtn").onclick = () => {
 ******************************/
 async function loadOffers() {
   try {
-    const res = await fetch("./data/plans.json");
-    if (!res.ok) throw new Error("JSON not found");
-
+    const res = await fetch("./data/offers.json");
     const offers = await res.json();
-
-    if (!Array.isArray(offers)) {
-      console.error("JSON is not an array:", offers);
-      renderOffers([]);
-      return;
-    }
 
     renderOffers(offers);
   } catch (e) {
-    console.error("Error loading offers:", e);
+    console.error(e);
     renderOffers([]);
   }
 
@@ -568,6 +560,7 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
 
 
