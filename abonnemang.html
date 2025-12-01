@@ -232,6 +232,35 @@ document.addEventListener("DOMContentLoaded", async () => {
 // Read ?op=Tele2 from URL
 const urlParams = new URLSearchParams(window.location.search);
 const directOperator = urlParams.get("op");
+document.addEventListener("DOMContentLoaded", async () => {
+  
+  // If direct operator referral
+  if (directOperator) {
+    loadOperatorDirect(directOperator);
+  }
+});
+async function loadOperatorDirect(operatorName) {
+  const res = await fetch("data/plans.json");
+  const allPlans = await res.json();
+
+  // Filter only plans from this operator
+  const opPlans = allPlans.filter(p => p.operator === operatorName);
+
+  // Shuffle to get random 3
+  const randomThree = opPlans
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 3);
+
+  // Show offers section
+  offersSection.classList.remove("hidden");
+  renderOffers(randomThree);
+
+  // Hide quizzes
+  mobilSection.classList.add("hidden");
+  familjSection.classList.add("hidden");
+
+  offersSection.scrollIntoView({ behavior: "smooth" });
+}
 
 /******************************
  QUIZ SECTIONS
@@ -642,6 +671,7 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
 
 
