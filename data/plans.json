@@ -58,7 +58,7 @@
     "price": 399,
     "addonPrice": 189,
     "period": "Ingen bindningstid",
-    "logo": "https://mb.cision.com/Public/3372/4130715/b9f707e6cee5920c_org.jpg",
+    "logo": "images/tele2.jpg",
     "text": "Tele2 familjeabonnemang med obegränsad surf. Extra medlemmar läggs till separat."
   },
 
@@ -73,7 +73,7 @@
     "dataAmount": 10,
     "price": 299,
     "period": "Ingen bindningstid",
-    "logo": "https://mb.cision.com/Public/3372/4130715/b9f707e6cee5920c_org.jpg",
+    "logo": "images/tele2.jpg",
     "text": "Fria samtal och sms, 10 GB surf i Sverige och EU."
   },
   {
@@ -87,7 +87,7 @@
     "price": 279,
     "oldPrice": 349,
     "period": "24 mån",
-    "logo": "https://mb.cision.com/Public/3372/4130715/b9f707e6cee5920c_org.jpg",
+    "logo": "images/tele2.jpg",
     "text": "Fria samtal och sms, dubbla surfen under kampanjperiod."
   },
   {
@@ -101,7 +101,7 @@
     "price": 399,
     "oldPrice": 449,
     "period": "24 mån",
-    "logo": "https://mb.cision.com/Public/3372/4130715/b9f707e6cee5920c_org.jpg",
+    "logo": "images/tele2.jpg",
     "text": "Obegränsad surf i Sverige, 50 GB i EU."
   },
   {
@@ -115,7 +115,7 @@
     "price": 449,
     "oldPrice": 549,
     "period": "24 mån",
-    "logo": "https://mb.cision.com/Public/3372/4130715/b9f707e6cee5920c_org.jpg",
+    "logo": "images/tele2.jpg",
     "text": "60 GB EU + 60 GB globalt, 1000 utlandsminuter."
   },
   {
@@ -129,7 +129,7 @@
     "dataAmount": 0,
     "price": 189,
     "period": "24 mån",
-    "logo": "https://mb.cision.com/Public/3372/4130715/b9f707e6cee5920c_org.jpg",
+    "logo": "images/tele2.jpg",
     "text": "Lägg till extra familjemedlem – samma surf som huvudabonnemanget."
   },
 
@@ -346,4 +346,5 @@
     "text": "Alla får sin egen surf, 5G ingår, per familjemedlem."
   }
 ]
+
 
