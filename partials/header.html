@@ -91,6 +91,12 @@
 
 <!-- Shrink on Scroll Script -->
 <script>
+        const path = window.location.pathname;
+
+if (path.includes("foretag.html")) {
+  document.querySelector('[href="foretag.html"]').classList.add("text-[#004C9E]", "font-medium", "relative");
+}
+
   window.addEventListener("scroll", () => {
     const logos = document.querySelectorAll(".partner-logo");
 
@@ -107,5 +113,6 @@
     }
   });
 </script>
+
 
 
