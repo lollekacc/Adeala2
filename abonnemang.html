@@ -229,6 +229,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.body.insertAdjacentHTML("beforeend",
     await fetch("partials/footer.html").then(r => r.text()));
 });
+// Read ?op=Tele2 from URL
+const urlParams = new URLSearchParams(window.location.search);
+const directOperator = urlParams.get("op");
 
 /******************************
  QUIZ SECTIONS
@@ -639,6 +642,7 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
 
 
