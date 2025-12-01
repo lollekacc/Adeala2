@@ -1,51 +1,38 @@
-<!-- TOP BAR (ALWAYS FIXED) -->
-<div id="topBar"
-     class="fixed top-0 left-0 w-full bg-white border-b text-sm text-gray-700 z-50 transition-all duration-300">
-  <div class="max-w-7xl mx-auto flex items-center gap-6 px-9 py-2">
-    <a href="index.html" class="relative pb-1 text-[#004C9E] font-medium">
-      Privat
-      <span class="absolute left-0 bottom-0 w-full h-[2px] bg-[#004C9E]"></span>
-    </a>
-
-    <a href="foretag.html" class="pb-1 hover:text-[#004C9E] transition">
-      Företag
-    </a>
-  </div>
-</div>
-
-<!-- MAIN HEADER (SHRINKS ON SCROLL) -->
+<!-- HEADER (Unified) -->
 <header id="mainHeader"
-        class="fixed top-[40px] left-0 w-full bg-white/80 backdrop-blur-md shadow-sm z-40 transition-all duration-300">
+        class="fixed top-0 left-0 w-full backdrop-blur-sm bg-white/20 shadow-sm z-50 transition-all duration-300">
 
-  <!-- MAIN HEADER ROW -->
-  <div id="mainRow"
-       class="max-w-7xl mx-auto flex items-center justify-between px-9 py-6 transition-all duration-300">
+  <!-- Top row: Logo + Nav + User -->
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-9 py-4">
+    
+<!-- Logo -->
+<a href="index.html" class="hover:opacity-80 transition block">
+  <img 
+    src="images\Logo.png" 
+    alt="Adeala Logo"
+    class="h-24 w-auto"
+  >
+</a>
 
-    <!-- Logo -->
-    <a href="index.html">
-      <img id="headerLogo"
-           src="images/Logo.png"
-           class="h-24 w-auto transition-all duration-300"
-           alt="Adeala Logo">
-    </a>
 
     <!-- Navigation -->
-    <nav class="hidden md:flex space-x-8 text-lg font-medium">
-      <a href="abonnemang.html">Abonnemang</a>
-      <a href="bredband.html">5G Bredband</a>
-      <a href="partner.html">Partner</a>
-      <a href="belöning.html">Belöning</a>
-      <a href="om-oss.html">Om oss</a>
-      <a href="kundservice.html">Kundservice</a>
+    <nav class="hidden md:flex space-x-8 text-lg font-medium mb-10">
+      <a href="abonnemang.html" class="hover:opacity-70 transition">Abonnemang</a>
+      <a href="bredband.html" class="hover:opacity-70 transition">5G Bredband</a>
+      <a href="partner.html" class="hover:opacity-70 transition">Partner</a>
+      <a href="belöning.html" class="hover:opacity-70 transition">Belöning</a>
+      <a href="om-oss.html" class="hover:opacity-70 transition">Om oss</a>
+      <a href="kundservice.html" class="hover:opacity-70 transition">Kundservice</a>
     </nav>
 
-    <a href="login.html">
+    <!-- Login -->
+    <a href="login.html" class="hover:opacity-70 transition">
       <i class="fas fa-user text-2xl"></i>
     </a>
 
   </div>
 
-  <!-- PARTNER BAR -->
+  <!-- Partner Bar (Merged inside header) -->
   <div id="partnerBar"
        class="max-w-7xl mx-auto px-9 pb-4 flex items-center gap-10 transition-all duration-300">
 
@@ -54,55 +41,49 @@
     </p>
 
     <div class="flex items-center gap-14">
-      <a href="abonnemang.html?op=Tele2"><img src="images/tele2.jpg" class="partner-logo h-20 transition-all duration-300"></a>
-      <a href="abonnemang.html?op=Telia"><img src="images/telia.png" class="partner-logo h-20 transition-all duration-300"></a>
-      <a href="abonnemang.html?op=Telenor"><img src="images/telenor.jpg" class="partner-logo h-20 transition-all duration-300"></a>
-      <a href="abonnemang.html?op=Tre"><img src="images/tre.jpg" class="partner-logo h-20 transition-all duration-300"></a>
-      <a href="abonnemang.html?op=Halebop"><img src="images/halebop.webp" class="partner-logo h-20 transition-all duration-300"></a>
+ <a href="abonnemang.html?op=Tele2">
+      <img src="images/tele2.jpg"
+           class="partner-logo h-20 transition-all duration-300" alt="Tele2">
+</a>
+ <a href="abonnemang.html?op=Telia">
+      <img src="images\telia.png"
+           class="partner-logo h-20 transition-all duration-300" alt="Telia">
+</a>
+<a href="abonnemang.html?op=Telenor">
+      <img src="images\telenor.jpg"
+           class="partner-logo h-20 transition-all duration-300" alt="Telenor">
+</a>
+<a href="abonnemang.html?op=Tre">
+      <img src="images\tre.jpg"
+           class="partner-logo h-20 transition-all duration-300" alt="Tre">
+</a>
+<a href="abonnemang.html?op=Halebop">
+      <img src="images\halebop.webp"
+           class="partner-logo h-20 transition-all duration-300" alt="Halebop">
+</a>
     </div>
+
   </div>
 
 </header>
 
-<!-- Spacer -->
-<div class="pt-[280px]"></div>
+<!-- Spacer below header -->
+<div class="pt-64"></div>
+
+<!-- Shrink on Scroll Script -->
 <script>
-  const mainHeader = document.getElementById("mainHeader");
-  const mainRow = document.getElementById("mainRow");
-  const logo = document.getElementById("headerLogo");
-  const partnerLogos = document.querySelectorAll(".partner-logo");
-
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 60) {
+    const logos = document.querySelectorAll(".partner-logo");
 
-      // Move header up under the top bar
-      mainHeader.style.top = "0px";
-
-      // Shrink header row
-      mainRow.classList.replace("py-6", "py-2");
-
-      // Shrink logo
-      logo.classList.replace("h-24", "h-16");
-
-      // Shrink partner icons
-      partnerLogos.forEach(logo => {
-        logo.classList.replace("h-20", "h-14");
+    if (window.scrollY > 10) {
+      logos.forEach(logo => {
+        logo.classList.remove("h-20");
+        logo.classList.add("h-16"); // medium shrink
       });
-
     } else {
-
-      // Reset original position below the top bar
-      mainHeader.style.top = "40px";
-
-      // Reset padding
-      mainRow.classList.replace("py-2", "py-6");
-
-      // Logo size
-      logo.classList.replace("h-16", "h-24");
-
-      // Partner logos
-      partnerLogos.forEach(logo => {
-        logo.classList.replace("h-14", "h-20");
+      logos.forEach(logo => {
+        logo.classList.remove("h-16");
+        logo.classList.add("h-20");
       });
     }
   });
