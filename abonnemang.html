@@ -309,16 +309,12 @@ document.getElementById("beloningBtn").onclick = () => {
 /******************************
  BACKEND API CALL
 ******************************/
-async function loadOffers(data) {
+async function loadOffers() {
   try {
-    const res = await fetch("/data/offers.json", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
-
+    const res = await fetch("/data/offers.json");
     const offers = await res.json();
-    renderOffers(offers.results ?? offers);
+
+    renderOffers(offers); // your JSON must be a simple array
   } catch (e) {
     console.error(e);
     renderOffers([]);
@@ -327,6 +323,7 @@ async function loadOffers(data) {
   offersSection.classList.remove("hidden");
   offersSection.scrollIntoView({ behavior: "smooth" });
 }
+
 
 /******************************
  QUIZ BUTTON STYLE
@@ -572,4 +569,5 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
