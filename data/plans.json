@@ -11,7 +11,7 @@
     "speed": "Upp till 1000 Mbit/s",
     "people": [1,2,3,4,5,6,7,8],
     "prices": [409,638,867,1096,1325,1554,1783,2012],
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/4/45/Telenor_Logo.svg",
+    "logo": "images/telenor.jpg",
     "text": "Familjeabonnemang med obegränsad surf och full 5G-hastighet."
   },
   {
@@ -26,7 +26,7 @@
     "speed": "Upp till 100 Mbit/s",
     "people": [1,2,3,4,5,6,7,8],
     "prices": [399,628,857,1086,1315,1544,1773,2002],
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/4/45/Telenor_Logo.svg",
+    "logo": "images/telenor.jpg",
     "text": "Delad surf för familjen, 5G upp till 100 Mbit/s."
   },
   {
@@ -41,7 +41,7 @@
     "speed": "Upp till 100 Mbit/s",
     "people": [1,2,3,4,5,6,7,8],
     "prices": [299,528,757,986,1215,1444,1673,1902],
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/4/45/Telenor_Logo.svg",
+    "logo": "images/telenor.jpg",
     "text": "Prisvärt familjeabonnemang med 10 GB surf per person."
   },
 
@@ -346,3 +346,4 @@
     "text": "Alla får sin egen surf, 5G ingår, per familjemedlem."
   }
 ]
+
