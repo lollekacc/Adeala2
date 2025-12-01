@@ -307,6 +307,9 @@ document.getElementById("beloningBtn").onclick = () => {
 /******************************
  BACKEND API CALL
 ******************************/
+/******************************
+ BACKEND API CALL — FIXED
+******************************/
 async function loadOffers(data) {
   try {
     const res = await fetch("/api/search", {
@@ -315,7 +318,10 @@ async function loadOffers(data) {
       body: JSON.stringify(data)
     });
 
+    // Your API returns either {results: [...] } OR pure array
     const offers = await res.json();
+
+    // Keep your original working logic
     renderOffers(offers.results ?? offers);
 
   } catch (e) {
@@ -323,8 +329,9 @@ async function loadOffers(data) {
     renderOffers([]);
   }
 
+  // Show section and scroll (IMPORTANT: after render)
   offersSection.classList.remove("hidden");
-  scrollToSection(offersSection);
+  scrollToSection(offersSection, -120);
 }
 
 /******************************
@@ -567,3 +574,4 @@ function checkGoToNumberStep() {
 </script>
 
 </html>
+
