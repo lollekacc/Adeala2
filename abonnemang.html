@@ -344,6 +344,11 @@ async function loadOffers(filters) {
   offersSection.scrollIntoView({ behavior: "smooth" });
 }
 
+function activateButton(btn) {
+  const card = btn.closest(".quiz-card");
+  card.querySelectorAll(".quiz-option").forEach(x => x.classList.remove("active"));
+  btn.classList.add("active");
+}
 
 /******************************
  MOBIL QUIZ LOGIC
