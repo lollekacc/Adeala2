@@ -311,7 +311,7 @@ document.getElementById("beloningBtn").onclick = () => {
 ******************************/
 async function loadOffers(filters) {
   try {
-    const res = await fetch("data/plans.json");
+    const res = await fetch("./data/plans.json");
     const allOffers = await res.json();
 
     // FILTER OFFERS BASED ON QUIZ
@@ -585,6 +585,7 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
 
 
