@@ -34,3 +34,8 @@ function addMessage(sender, text) {
   box.scrollTop = box.scrollHeight;
   return msg; // <--- IMPORTANT
 }
+document.getElementById("ai-send").addEventListener("click", sendMessage);
+
+document.getElementById("ai-text").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") sendMessage();
+});
