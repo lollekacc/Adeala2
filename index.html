@@ -101,6 +101,16 @@ Snabbt och enkelt</h2>
     </a>
   </div>
 </section>
+<div id="chat-container"></div>
+
+<script>
+  fetch("/Adeala2/partials/chat.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("chat-container").innerHTML = html;
+    })
+    .catch(err => console.error("Failed to load chat widget", err));
+</script>
 
   <!-- Fade animations -->
   <script>
@@ -141,6 +151,7 @@ Snabbt och enkelt</h2>
 
 </body>
 </html>
+
 
 
 
