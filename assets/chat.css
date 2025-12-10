@@ -1,3 +1,6 @@
+/* =========================================================
+   CHAT CONTAINER
+   ========================================================= */
 #ai-chat {
   position: fixed;
   bottom: 20px;
@@ -11,23 +14,34 @@
   flex-direction: column;
   overflow: hidden;
   font-family: Inter, sans-serif;
+  z-index: 99999;
 }
 
+/* =========================================================
+   MESSAGES
+   ========================================================= */
 #ai-messages {
   flex: 1;
   padding: 15px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
+/* =========================================================
+   INPUT
+   ========================================================= */
 #ai-input {
   display: flex;
+  border-top: 1px solid #ddd;
 }
 
 #ai-input input {
   flex: 1;
   padding: 12px;
   border: none;
-  border-top: 1px solid #ddd;
+  outline: none;
 }
 
 #ai-input button {
@@ -37,26 +51,51 @@
   border: none;
   cursor: pointer;
 }
-/* USER MESSAGE */
+
+/* =========================================================
+   MESSAGE BUBBLES
+   ========================================================= */
 .msg-user {
   background: #0C4A3C;
   color: white;
   padding: 10px 14px;
-  margin: 8px 0;
   border-radius: 12px;
+  max-width: 80%;
   align-self: flex-end;
-  max-width: 85%;
-  word-break: break-word;
 }
 
-/* BOT MESSAGE */
 .msg-bot {
   background: #f1f1f1;
   color: #333;
   padding: 10px 14px;
-  margin: 8px 0;
   border-radius: 12px;
+  max-width: 80%;
   align-self: flex-start;
-  max-width: 85%;
-  word-break: break-word;
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE FIXES
+   ========================================================= */
+@media (max-width: 768px) {
+  #ai-chat {
+    width: 90vw;           /* fills most of the screen */
+    height: 60vh;          /* larger box for mobile */
+    right: 5vw;
+    bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  #ai-chat {
+    width: 100vw;
+    height: 60vh;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;      /* fullscreen bottom drawer look */
+  }
+
+  #ai-input button {
+    width: 70px;
+  }
 }
