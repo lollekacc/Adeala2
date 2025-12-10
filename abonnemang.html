@@ -550,17 +550,22 @@ function finishNumbers() {
   questionTitle.textContent = "Sammanfattning";
 
   // Hämta valt erbjudande
-  const chosenOffer = document.querySelector(".offer-choice.active");
-  const offerTitle = chosenOffer
-    ? chosenOffer.querySelector("h3").textContent
-    : "Okänt erbjudande";
+const chosenOffer = document.querySelector(".offer-choice.active");
+const offerTitle = chosenOffer
+  ? chosenOffer.querySelector("h3").textContent
+  : "Okänt erbjudande";
+
+const offerOperator = chosenOffer
+  ? chosenOffer.querySelector("p.text-sm").textContent // operator line
+  : "";
 
   let summaryHTML = `
     <div class="p-6 bg-white rounded-2xl shadow text-left space-y-6">
 
       <h3 class="text-2xl font-bold text-[#0C4A3C]">Valt erbjudande</h3>
       <p class="text-lg font-semibold">${offerTitle}</p>
-
+      <p class="text-gray-700 text-md">från ${offerOperator}</p>
+      
       <h3 class="text-2xl font-bold text-[#0C4A3C] mt-6">Personer</h3>
       <div class="space-y-4">
   `;
@@ -617,6 +622,7 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
 
 
