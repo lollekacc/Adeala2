@@ -149,67 +149,57 @@
   <!-- =======================
        OFFERS SECTION
   ======================= -->
-  <section id="offersSection" class="hidden mt-20 px-10 pb-20">
+
+<section id="offersSection" class="hidden mt-20 px-10 pb-20">
   <h2 class="text-center text-4xl font-bold text-[#0C4A3C] mb-14">
     Aktuella erbjudanden
   </h2>
 
-  <!-- FLEX: LEFT (reward) + RIGHT (offers) -->
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-[1800px] mx-auto">
 
-    <!-- REWARD (left 1/3) -->
+    <!-- REWARD -->
     <div id="rewardBox"
-     class="border rounded-2xl p-10 shadow bg-white flex flex-col text-center h-fit sticky top-10">
+         class="border rounded-2xl p-10 shadow bg-white flex flex-col text-center h-fit sticky top-10">
 
-  <p id="rewardValue"
-     class="text-5xl font-extrabold text-[#004C9E] mb-2">
-     1000:–
-  </p>
+      <p id="rewardValue" class="text-5xl font-extrabold text-[#004C9E] mb-2">1000:–</p>
+      <p class="text-lg font-semibold text-[#0C4A3C] mb-1">Grattis på ditt VärdeCheck</p>
 
-  <p class="text-lg font-semibold text-[#0C4A3C] mb-1">
-    Grattis på ditt VärdeCheck
-  </p>
+      <button id="beloningBtn"
+              class="w-full adeala-btn text-white text-lg font-semibold py-3 px-6 rounded-xl transition">
+        Välj din belöning
+      </button>
 
-  <button id="beloningBtn" class="w-full adeala-btn text-white text-lg font-semibold py-3 px-6 rounded-xl transition">
-  Välj din belöning
-</button>
-
-
-  <!-- Invisible placeholder to avoid JS errors -->
-  <div id="rewardContent" class="hidden"></div>
-
-</div>
-
-
-
-
-    <!-- OFFERS (right 2/3) -->
-    <div id="offers-container" class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10">
+      <div id="rewardContent" class="hidden"></div>
     </div>
 
-  </div>
-  <section id="numberSection" class="hidden mt-20 px-10 pb-20">
-<section id="portNumberSection" class="hidden mt-20 px-10 pb-20">
-  <h2 class="text-center text-3xl font-bold text-[#0C4A3C] mb-10">
-    Fyll i numren som ska flyttas
-  </h2>
-
-  <div id="phoneInputsContainer" class="max-w-xl mx-auto flex flex-col gap-6"></div>
-
-  <button id="confirmNumbersBtn"
-          class="mt-10 adeala-btn w-full py-4 rounded-xl text-lg">
-    Bekräfta nummer
-  </button>
-</section>
-
- 
+    <!-- OFFERS -->
+    <div id="offers-container"
+         class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10"></div>
 
   </div>
-
 </section>
 
-</section>
 
+<!-- =======================
+     NUMBER FLOW SECTION
+======================= -->
+<section id="numberSection" class="hidden mt-20 px-10 pb-20">
+
+  <section id="portNumberSection" class="hidden mt-20 px-10 pb-20">
+    <h2 class="text-center text-3xl font-bold text-[#0C4A3C] mb-10">
+      Fyll i numren som ska flyttas
+    </h2>
+
+    <div id="phoneInputsContainer"
+         class="max-w-xl mx-auto flex flex-col gap-6"></div>
+
+    <button id="confirmNumbersBtn"
+            class="mt-10 adeala-btn w-full py-4 rounded-xl text-lg">
+      Bekräfta nummer
+    </button>
+  </section>
+
+</section>
 
   <!-- =======================
        JAVASCRIPT
@@ -612,17 +602,3 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
