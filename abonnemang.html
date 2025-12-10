@@ -302,7 +302,7 @@ document.getElementById("beloningBtn").onclick = () => {
 ******************************/
 async function loadOffers(filters) {
   try {
-    const res = await fetch("./data/plans.json");
+    const res = await fetch("./data/plans.json?nocache=" + Date.now());
     let offers = await res.json();
 
     // 1. Filter by category
@@ -602,3 +602,4 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
