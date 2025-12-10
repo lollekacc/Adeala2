@@ -318,7 +318,17 @@ async function loadOffers(filters) {
     let offers = allOffers.filter(o => {
 
       // Category match
-      if (filters.category && o.category !== filters.category) return false;
+      // Allow cross-category results if operator preference matches
+if (filters.category) {
+  const sameCategory = o.category === filters.category;
+  const operatorMatch =
+    filters.preferredOperator &&
+    o.operator.toLowerCase() === filters.preferredOperator.toLowerCase();
+
+  // Reject only when plan is wrong category AND operator does not match preference
+  if (!sameCategory && !operatorMatch) return false;
+}
+
 
       // Budget match
       if (filters.budget && o.prices && o.prices[0] > filters.budget) return false;
@@ -585,6 +595,7 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
 
 
