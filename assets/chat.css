@@ -37,3 +37,26 @@
   border: none;
   cursor: pointer;
 }
+/* USER MESSAGE */
+.msg-user {
+  background: #0C4A3C;
+  color: white;
+  padding: 10px 14px;
+  margin: 8px 0;
+  border-radius: 12px;
+  align-self: flex-end;
+  max-width: 85%;
+  word-break: break-word;
+}
+
+/* BOT MESSAGE */
+.msg-bot {
+  background: #f1f1f1;
+  color: #333;
+  padding: 10px 14px;
+  margin: 8px 0;
+  border-radius: 12px;
+  align-self: flex-start;
+  max-width: 85%;
+  word-break: break-word;
+}
