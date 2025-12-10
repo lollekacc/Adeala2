@@ -1,80 +1,36 @@
-// ===============================
-// FETCH PLANS LOGIC
-// ===============================
-async function fetchPlans(userInput) {
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import OpenAI from "openai";
+
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+
+// LOAD KEY FROM ENVIRONMENT VARIABLE
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+app.post("/api/chat", async (req, res) => {
   try {
-    const response = await fetch('/api/search', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(userInput)
+    const userMessage = req.body.message;
+
+    const response = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        { role: "system", content: "You are Adeala's AI assistant. Be friendly and helpful." },
+        { role: "user", content: userMessage }
+      ]
     });
 
-    const result = await response.json();
-    console.log("Backend response:", result);
-
-    const output = document.getElementById("result");
-    if (output) {
-      output.innerHTML = JSON.stringify(result, null, 2);
-    }
-
-    return result;
+    const reply = response.choices[0].message.content;
+    res.json({ reply });
 
   } catch (err) {
-    console.error("Error fetching plans:", err);
+    console.error("Error:", err);
+    res.status(500).json({ error: "Something went wrong" });
   }
-}
-
-// ===============================
-// AI CHAT FRONTEND LOGIC
-// ===============================
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const sendBtn = document.getElementById("chatSend");
-  const input = document.getElementById("freeSearch");
-  const chatBody = document.getElementById("chatBody");
-
-  if (!sendBtn || !input || !chatBody) {
-    console.warn("⚠️ Chat elements not found on this page.");
-    return;
-  }
-
-  function addMessage(text, type) {
-    const msg = document.createElement("div");
-    msg.className = `${type}-message`;
-    msg.innerHTML = `<p>${text}</p>`;
-    chatBody.appendChild(msg);
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
-
-  async function sendMessage() {
-    const message = input.value.trim();
-    if (!message) return;
-
-    addMessage(message, "user");
-    input.value = "";
-
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message })
-      });
-
-      const data = await res.json();
-      addMessage(data.reply, "bot");
-    } catch (err) {
-      console.error("Chat error:", err);
-      addMessage("Oj! Något gick fel 😭", "bot");
-    }
-  }
-
-  sendBtn.addEventListener("click", sendMessage);
-
-  input.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") sendMessage();
-  });
-
 });
+
+app.listen(3000, () => console.log("AI server running on port 3000"));
