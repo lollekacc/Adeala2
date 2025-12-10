@@ -38,6 +38,7 @@ function addMessage(sender, text) {
 }
 document.getElementById("ai-send").addEventListener("click", sendMessage);
 
-document.getElementById("ai-text").addEventListener("keypress", (e) => {
+document.getElementById("ai-text").addEventListener("keydown", (e) => {
   if (e.key === "Enter") sendMessage();
 });
+
