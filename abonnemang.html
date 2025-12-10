@@ -214,8 +214,13 @@
   <!-- =======================
        JAVASCRIPT
   ======================= -->
-  
-<script>
+<script type="module" src="utils/priceCalculator.js"></script>
+<script type="module" src="utils/scoringEngine.js"></script>
+
+<script type="module">
+import { scoringEngine } from "./utils/scoringEngine.js";
+import calculatePrice from "./utils/priceCalculator.js";
+
 /******************************
  LOAD HEADER + FOOTER
 ******************************/
@@ -314,29 +319,46 @@ async function loadOffers(filters) {
     const res = await fetch("./data/plans.json");
     const allOffers = await res.json();
 
-    // FILTER OFFERS BASED ON QUIZ
-    let offers = allOffers.filter(o => {
+    // Step 1 — score all plans
+    const scored = allOffers.map(plan => {
+      const score = scoringEngine(plan, filters);
+      const finalPrice = calculatePrice(plan, filters.peopleCount || 1);
 
-      // Category match
-      if (filters.category && o.category !== filters.category) return false;
-
-      // Budget match
-      if (filters.budget && o.prices && o.prices[0] > filters.budget) return false;
-
-      // Operator preference
-      if (filters.preferredOperator && filters.preferredOperator !== "" && o.operator !== filters.preferredOperator)
-        return false;
-
-      return true;
+      return {
+        ...plan,
+        score,
+        finalPrice
+      };
     });
 
-    // Limit to 3 results
-    offers = offers.slice(0, 3);
+    // Step 2 — filter out plans with no price
+    let valid = scored.filter(p => p.finalPrice !== null);
 
-    renderOffers(offers);
+    // Step 3 — strict category (mobil / familj)
+    valid = valid.filter(p => p.category === filters.category);
+
+    // Step 4 — apply budget filter to FINAL calculated price
+    if (filters.budget) {
+      valid = valid.filter(p => p.finalPrice <= filters.budget);
+    }
+
+    // Step 5 — apply operator preference (optional – keep your UX behavior)
+    if (filters.preferredOperator) {
+      valid = valid.filter(
+        p => p.operator === filters.preferredOperator
+      );
+    }
+
+    // Step 6 — sort by score (best recommendations first)
+    valid.sort((a, b) => b.score - a.score);
+
+    // Limit to top 3
+    const best = valid.slice(0, 3);
+
+    renderOffers(best);
 
   } catch (err) {
-    console.error(err);
+    console.error("Offer loading failed:", err);
     renderOffers([]);
   }
 
@@ -585,6 +607,7 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
 
 
