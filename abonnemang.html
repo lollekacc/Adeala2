@@ -340,11 +340,23 @@ async function loadOffers(filters) {
 
     // 5. Surf need
     offers = offers.filter(plan => {
-      const surf = plan.dataAmount;
-      if (filters.dataNeed === "low") return surf <= 10;
-      if (filters.dataNeed === "medium") return surf <= 50;
-      return true; // high = allow all
-    });
+  const surf = plan.dataAmount;
+
+  if (filters.dataNeed === "low") {
+    return surf <= 10;
+  }
+
+  if (filters.dataNeed === "medium") {
+    return surf > 10 && surf <= 50;
+  }
+
+  if (filters.dataNeed === "high") {
+    return surf > 50;  // unlimited or large data plans
+  }
+
+  return true;
+});
+
 
 // 6. Sort by final price (cheapest first), then take top 3
 offers = offers
@@ -605,5 +617,6 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
 
