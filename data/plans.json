@@ -15,6 +15,59 @@
     "text": "Familjeabonnemang med obegränsad surf och full 5G-hastighet."
   },
   {
+  "id": 101,
+  "operator": "Telenor",
+  "title": "Telenor Mobil 6 GB",
+  "category": "mobil",
+  "isFamilyPlan": false,
+  "data": "6 GB",
+  "dataAmount": 6,
+  "price": 199,
+  "period": "Ingen bindningstid",
+  "logo": "images/telenor.jpg",
+  "text": "Basabonnemang med 5G och fria samtal/sms."
+},
+{
+  "id": 102,
+  "operator": "Telenor",
+  "title": "Telenor Mobil 15 GB",
+  "category": "mobil",
+  "isFamilyPlan": false,
+  "data": "15 GB",
+  "dataAmount": 15,
+  "price": 249,
+  "period": "Ingen bindningstid",
+  "logo": "images/telenor.jpg",
+  "text": "Perfekt mellannivå med 5G och EU-surf."
+},
+{
+  "id": 103,
+  "operator": "Telenor",
+  "title": "Telenor Mobil 30 GB",
+  "category": "mobil",
+  "isFamilyPlan": false,
+  "data": "30 GB",
+  "dataAmount": 30,
+  "price": 299,
+  "period": "Ingen bindningstid",
+  "logo": "images/telenor.jpg",
+  "text": "Storsäljare med 5G, fria samtal/sms och bra surfpott."
+},
+{
+  "id": 104,
+  "operator": "Telenor",
+  "title": "Telenor Mobil Obegränsad",
+  "category": "mobil",
+  "isFamilyPlan": false,
+  "data": "Obegränsad",
+  "dataAmount": 9999,
+  "price": 349,
+  "period": "Ingen bindningstid",
+  "logo": "images/telenor.jpg",
+  "text": "Obegränsad surf med 5G i toppklass."
+}
+
+  {
     "id": 2,
     "operator": "Telenor",
     "title": "30 GB 5G Familj",
@@ -346,5 +399,6 @@
     "text": "Alla får sin egen surf, 5G ingår, per familjemedlem."
   }
 ]
+
 
 
