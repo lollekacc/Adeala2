@@ -1,6 +1,8 @@
 console.log("CHAT.JS LOADED");
 
 async function sendMessage() {
+  console.log("sendMessage() triggered");
+
   const input = document.getElementById("ai-text");
   const message = input.value.trim();
   if (!message) return;
@@ -8,9 +10,9 @@ async function sendMessage() {
   addMessage("user", message);
   input.value = "";
 
-  // Show bot is thinking
+  // Show bot thinking
   const thinkingMsg = addMessage("bot", "...");
-  
+
   try {
     const res = await fetch("https://adeala-ai-server.onrender.com/api/chat", {
       method: "POST",
@@ -20,13 +22,14 @@ async function sendMessage() {
 
     const data = await res.json();
 
-    // Replace "..." with final message
     thinkingMsg.textContent = data.reply;
 
   } catch (err) {
+    console.error(err);
     thinkingMsg.textContent = "Servern svarar inte just nu. Försök igen om en stund.";
   }
 }
+
 function addMessage(sender, text) {
   const box = document.getElementById("ai-messages");
   const msg = document.createElement("div");
@@ -34,11 +37,12 @@ function addMessage(sender, text) {
   msg.textContent = text;
   box.appendChild(msg);
   box.scrollTop = box.scrollHeight;
-  return msg; // <--- IMPORTANT
+  return msg;
 }
+
+// Event listeners MUST be after the DOM exists
 document.getElementById("ai-send").addEventListener("click", sendMessage);
 
 document.getElementById("ai-text").addEventListener("keydown", (e) => {
   if (e.key === "Enter") sendMessage();
 });
-
