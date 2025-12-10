@@ -313,35 +313,50 @@ document.getElementById("beloningBtn").onclick = () => {
 async function loadOffers(filters) {
   try {
     const res = await fetch("./data/plans.json");
-    const allOffers = await res.json();
+    let offers = await res.json();
 
-    let offers = allOffers.filter(plan => {
+    // 1. Filter by category
+    offers = offers.filter(plan => plan.category === filters.category);
 
-      // 1. Category match
-      if (plan.category !== filters.category) return false;
+    // 2. Filter by operator
+    if (filters.preferredOperator) {
+      offers = offers.filter(plan => plan.operator === filters.preferredOperator);
+    }
 
-      // 2. Operator match (optional)
-      if (filters.preferredOperator && filters.preferredOperator !== "" &&
-          plan.operator !== filters.preferredOperator) {
-        return false;
+    // 3. Calculate final price
+    offers = offers.map(plan => {
+      let finalPrice = null;
+
+      if (!plan.isFamilyPlan) {
+        // Single user plan
+        finalPrice = plan.price;
+
+      } else if (plan.familyPriceType === "packaged") {
+        finalPrice = plan.prices[filters.peopleCount - 1] || null;
+
+      } else if (plan.familyPriceType === "addon") {
+        const extra = Math.max(filters.peopleCount - 1, 0);
+        finalPrice = plan.price + extra * plan.addonPrice;
+
+      } else if (plan.familyPriceType === "perPerson") {
+        finalPrice = plan.price * filters.peopleCount;
       }
 
-      // 3. Price match
-      const planPrice = plan.price ?? (plan.prices ? plan.prices[0] : null);
-      if (planPrice === null) return false;
-      if (filters.budget && planPrice > filters.budget) return false;
-
-      // 4. Surf need match
-      const surf = plan.dataAmount;
-
-      if (filters.dataNeed === "low" && surf > 10) return false;
-      if (filters.dataNeed === "medium" && surf > 50) return false;
-      // "high" allows everything, even unlimited
-
-      return true;
+      return { ...plan, finalPrice };
     });
 
-    // Limit to 3 results
+    // 4. Budget filter (using calculated final price)
+    offers = offers.filter(p => p.finalPrice !== null && p.finalPrice <= filters.budget);
+
+    // 5. Surf need
+    offers = offers.filter(plan => {
+      const surf = plan.dataAmount;
+      if (filters.dataNeed === "low") return surf <= 10;
+      if (filters.dataNeed === "medium") return surf <= 50;
+      return true; // high = allow all
+    });
+
+    // 6. Limit top 3
     offers = offers.slice(0, 3);
 
     renderOffers(offers);
@@ -354,6 +369,7 @@ async function loadOffers(filters) {
   offersSection.classList.remove("hidden");
   offersSection.scrollIntoView({ behavior: "smooth" });
 }
+
 
 function activateButton(btn) {
   const card = btn.closest(".quiz-card");
@@ -596,6 +612,7 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
 
 
