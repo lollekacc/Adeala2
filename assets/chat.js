@@ -6,16 +6,25 @@ async function sendMessage() {
   addMessage("user", message);
   input.value = "";
 
-  const res = await fetch("/api/chat", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message })
-  });
+  // Show bot is thinking
+  const thinkingMsg = addMessage("bot", "...");
+  
+  try {
+    const res = await fetch("https://adeala-ai-server.onrender.com/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+    });
 
-  const data = await res.json();
-  addMessage("bot", data.reply);
+    const data = await res.json();
+
+    // Replace "..." with final message
+    thinkingMsg.textContent = data.reply;
+
+  } catch (err) {
+    thinkingMsg.textContent = "Servern svarar inte just nu. Försök igen om en stund.";
+  }
 }
-
 function addMessage(sender, text) {
   const box = document.getElementById("ai-messages");
   const msg = document.createElement("div");
@@ -23,4 +32,5 @@ function addMessage(sender, text) {
   msg.textContent = text;
   box.appendChild(msg);
   box.scrollTop = box.scrollHeight;
+  return msg; // <--- IMPORTANT
 }
