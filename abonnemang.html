@@ -346,8 +346,11 @@ async function loadOffers(filters) {
       return true; // high = allow all
     });
 
-    // 6. Limit top 3
-    offers = offers.slice(0, 3);
+// 6. Sort by final price (cheapest first), then take top 3
+offers = offers
+  .sort((a, b) => a.finalPrice - b.finalPrice)
+  .slice(0, 3);
+
 
     renderOffers(offers);
 
@@ -602,4 +605,5 @@ function checkGoToNumberStep() {
   
 </body>
 </html>
+
 
