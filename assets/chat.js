@@ -1,3 +1,5 @@
+console.log("CHAT.JS LOADED");
+
 async function sendMessage() {
   const input = document.getElementById("ai-text");
   const message = input.value.trim();
