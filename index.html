@@ -12,6 +12,40 @@
 </head>
 
 <body class="min-h-screen font-[Inter] bg-white text-gray-900">
+<!-- POPUP MODAL -->
+<div id="promo-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center z-[9999]">
+  <div class="relative bg-white rounded-2xl shadow-2xl p-6 w-[90%] max-w-lg animate-scaleIn">
+
+    <!-- Close Button -->
+    <button id="promo-close" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl">
+      &times;
+    </button>
+
+    <!-- Image Stack -->
+    <div class="relative w-full h-56 mb-6">
+      <img src="images/ps5.jpg" 
+           class="absolute top-0 left-0 w-40 rotate-[-8deg] drop-shadow-xl z-10">
+
+      <img src="images/samsung-tv.jpg" 
+           class="absolute bottom-0 right-0 w-48 rotate-[3deg] drop-shadow-xl z-0">
+    </div>
+
+    <!-- Text -->
+    <h2 class="text-2xl font-extrabold text-gray-900 mb-3">
+      Få Playstation 5 eller Samsung TV – på köpet?
+    </h2>
+
+    <p class="text-gray-600 mb-6">
+      Just nu får du exklusiva erbjudande när du tecknar via Adeala.
+    </p>
+
+    <!-- CTA Button -->
+    <a href="abonnemang.html"
+       class="adeala-btn w-full block text-center py-3 text-lg font-semibold">
+       Utforska mer
+    </a>
+  </div>
+</div>
 
   <!-- Header Placeholder -->
   <div id="header-placeholder"></div>
@@ -38,12 +72,11 @@
          class="px-8 py-4 bg-blue-600 text-white rounded-xl text-lg font-semibold hover:bg-blue-700 transition">
         Se dina erbjudanden
       </a>
-    <!--
+
       <a href="abonnemang.html" class="adeala-btn-secondary"
          class="px-8 py-4 bg-white/20 text-white rounded-xl text-lg font-semibold hover:bg-white/30 transition">
         Starta snabb-guiden
       </a>
-      -->
     </div>
   </div>
 </section>
@@ -77,8 +110,8 @@ Snabbt och enkelt</h2>
 
 <div id="quiz-step-1">
   <div class="grid sm:grid-cols-2 gap-4"> 
-    <a href="abonnemang.html?op=Tele2"
-       class="quiz-option adeala-btn-secondary text-center block">💸 Bäst täckning</a>
+    <a href="abonnemang.html?filter=pris" 
+       class="quiz-option adeala-btn-secondary text-center block">💸 Billigast pris</a>
 
     <a href="abonnemang.html?filter=surf" 
        class="quiz-option adeala-btn-secondary text-center block">📶 Mycket surf</a>
@@ -101,8 +134,6 @@ Snabbt och enkelt</h2>
     </a>
   </div>
 </section>
-<div id="chat-container"></div>
-
 
   <!-- Fade animations -->
   <script>
@@ -124,7 +155,11 @@ Snabbt och enkelt</h2>
       document.getElementById("header-placeholder").innerHTML =
         await fetch("partials/header.html").then(r => r.text());
 
-      
+      document.body.insertAdjacentHTML(
+        "beforeend",
+        await fetch("partials/chat.html").then(r => r.text())
+      );
+
       document.body.insertAdjacentHTML(
         "beforeend",
         await fetch("partials/footer.html").then(r => r.text())
@@ -135,15 +170,94 @@ Snabbt och enkelt</h2>
       script.defer = true;
       document.body.appendChild(script);
     });
+    
   </script>
+<script>
+  const quizOptions = document.querySelectorAll(".quiz-option");
+  const quizResult = document.getElementById("quiz-result");
+  const quizText = document.getElementById("quiz-text");
+  const quizLink = document.getElementById("quiz-link");
+
+  quizOptions.forEach(option => {
+    option.addEventListener("click", () => {
+      const answer = option.dataset.answer;
+
+      let text = "";
+      let link = "";
+
+      switch (answer) {
+        case "pris":
+          text = `
+            Du prioriterar lägsta pris 💸<br>
+            Här är våra mest prisvärda abonnemang just nu:
+            <ul class='list-disc ml-6 mt-2'>
+              <li>Tre 5GB – från 99 kr/mån</li>
+              <li>Hallon 8GB – från 119 kr/mån</li>
+              <li>Fello 8GB – från 125 kr/mån</li>
+            </ul>
+          `;
+          link = "abonnemang.html?filter=cheap";
+          break;
+
+        case "surf":
+          text = `
+            Du vill ha mycket surf 📶<br>
+            Bästa datamängderna just nu:
+            <ul class='list-disc ml-6 mt-2'>
+              <li>Tele2 Obegränsad – snabbaste nätet</li>
+              <li>Telenor Obegränsad – stabil täckning</li>
+              <li>Halebop 50GB – prisvärt och snabbt</li>
+            </ul>
+          `;
+          link = "abonnemang.html?filter=surf";
+          break;
+
+        case "familj":
+          text = `
+            Du letar efter familjeabonnemang 👨‍👩‍👧‍👦<br>
+            Perfekt! Vi har en egen sida med all info.
+          `;
+          link = "quiz-familj.html";
+          break;
+
+        case "presentkort":
+          text = `
+            Du vill maximera bonus och presentkort 🎁<br>
+            Här hittar du våra bästa bonusar.
+          `;
+          link = "belöning.html";
+          break;
+      }
+
+      quizText.innerHTML = text;
+      quizLink.href = link;
+
+      quizResult.classList.remove("hidden");
+      quizResult.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("promo-modal");
+  const closeBtn = document.getElementById("promo-close");
+
+  // Show popup automatically
+  setTimeout(() => {
+    modal.classList.remove("hidden");
+  }, 300);
+
+  // Close via X
+  closeBtn.onclick = () => modal.classList.add("hidden");
+
+  // Close when clicking outside box
+  modal.onclick = (e) => {
+    if (e.target === modal) modal.classList.add("hidden");
+  };
+});
+</script>
 
 </body>
 </html>
-
-
-
-
-
-
 
 
