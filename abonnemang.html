@@ -156,7 +156,11 @@
   </h2>
 
 <div class="max-w-[1800px] mx-auto">
+ <div id="offers-container"
+         class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10"></div>
 
+  </div>
+</section>
 
 
 <!-- =======================
@@ -271,15 +275,6 @@ function renderOffers(offers) {
     offersContainer.appendChild(card);
   });
 }
-
-
-document.getElementById("beloningBtn").onclick = () => {
-  if (!document.querySelector(".offer-choice.active"))
-    return alert("Välj ett erbjudande först!");
-
-  window.beloningChosen = true;
-  checkGoToNumberStep();
-};
 
 /******************************
  BACKEND API CALL
@@ -629,6 +624,7 @@ function calculateReward(price) {
   
 </body>
 </html>
+
 
 
 
