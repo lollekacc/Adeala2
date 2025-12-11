@@ -256,7 +256,7 @@ function renderOffers(offers) {
     });
 
 card.innerHTML = `
-  <button class="offer-bubble gift-btn" data-reward="${reward}">
+  <button class="reward-circle gift-btn" data-reward="${reward}">
     ${reward}:-
   </button>
 
@@ -273,6 +273,7 @@ card.innerHTML = `
     <p class="font-semibold text-lg mb-4">${o.finalPrice} kr/mån</p>
   </div>
 `;
+
 
 
     offersContainer.appendChild(card);
@@ -627,6 +628,7 @@ function calculateReward(price) {
   
 </body>
 </html>
+
 
 
 
