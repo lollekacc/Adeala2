@@ -34,50 +34,97 @@
 
   <!-- Rewards Script -->
   <script>
-    const rewards = [
-      {
-        company: "ICA Maxi",
-        logo: "https://detailproduktion.se/wp-content/uploads/2014/04/ica-maxi-stormarknad-logo.png",
-        title: "Presentkort från ICA Maxi",
-        text: "Få en uppskattad gåva som gör vardagen lite enklare när du tecknar ett familjeerbjudande.",
-        link: "signera.html"
-      },
-      {
-        company: "Amazon",
-        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1280px-Amazon_logo.svg.png",
-        title: "Streaming & leveransförmåner",
-        text: "Ta del av exklusiva tjänster från Amazon som en extra bonus vid utvalda abonnemang.",
-        link: "signera.html"
-      },
-      {
-        company: "MIO",
-        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/MIO_Logo.svg/2560px-MIO_Logo.svg.png",
-        title: "Inredningsförmån hos MIO",
-        text: "Få ett extra erbjudande på inredning när du tecknar via Adeala.",
-        link: "signera.html"
-      },
-      {
-        company: "Elgiganten",
-        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Elgiganten_logo.svg/2560px-Elgiganten_logo.svg.png",
-        title: "Teknikbonus hos Elgiganten",
-        text: "Nya abonnemang kan ge dig något extra till ditt nästa teknikinköp.",
-        link: "signera.html"
-      },
-      {
-        company: "Spotify",
-        logo: "https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg",
-        title: "Musikförmån via Spotify",
-        text: "Upplev musik utan avbrott under en introduktionsperiod.",
-        link: "signera.html"
-      },
-      {
-        company: "Halebop",
-        logo: "https://mobilt-bredband.net/wp-content/uploads/2025/03/unnamed.png",
-        title: "Startförmån från Halebop",
-        text: "Byt till Halebop via Adeala och ta del av en välkomstbonus.",
-        link: "signera.html"
-      }
-    ];
+const rewards = [
+  {
+    company: "ICA Maxi",
+    logo: "https://detailproduktion.se/wp-content/uploads/2014/04/ica-maxi-stormarknad-logo.png",
+    title: "Presentkort från ICA Maxi",
+    text: "Få en uppskattad gåva som gör vardagen lite enklare när du tecknar ett familjeerbjudande.",
+    link: "signera.html"
+  },
+  {
+    company: "Amazon",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1280px-Amazon_logo.svg.png",
+    title: "Streaming & leveransförmåner",
+    text: "Ta del av exklusiva tjänster från Amazon som en extra bonus vid utvalda abonnemang.",
+    link: "signera.html"
+  },
+  {
+    company: "MIO",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/MIO_Logo.svg/2560px-MIO_Logo.svg.png",
+    title: "Inredningsförmån hos MIO",
+    text: "Få ett extra erbjudande på inredning när du tecknar via Adeala.",
+    link: "signera.html"
+  },
+
+  /* -------------------------
+     NEW REWARDS START HERE
+     ------------------------- */
+
+  {
+    company: "Coop",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Coop_Logo.svg/2560px-Coop_Logo.svg.png",
+    title: "Presentkort från Coop",
+    text: "Handla mat billigare med ett exklusivt presentkort när du tecknar abonnemang via Adeala.",
+    link: "signera.html"
+  },
+  {
+    company: "H&M",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/53/H%26M-Logo.svg",
+    title: "Bonus på H&M",
+    text: "Uppgradera garderoben med en modebonus från H&M – gäller vid utvalda mobilabonnemang.",
+    link: "signera.html"
+  },
+  {
+    company: "MQ",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/MQ_Logo.svg/2560px-MQ_Logo.svg.png",
+    title: "Modeförmån hos MQ",
+    text: "Ta del av exklusiva modeerbjudanden från MQ när du tecknar via Adeala.",
+    link: "signera.html"
+  },
+  {
+    company: "Guldfynd",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Guldfynd_logo.svg",
+    title: "Bonus hos Guldfynd",
+    text: "Få rabatt på smycken och presenter när du aktiverar ditt abonnemang via oss.",
+    link: "signera.html"
+  },
+  {
+    company: "Hemtex",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Hemtex_logo.svg/2560px-Hemtex_logo.svg.png",
+    title: "Inredningsbonus på Hemtex",
+    text: "Spara på heminredning med en värdecheck från Hemtex.",
+    link: "signera.html"
+  },
+  {
+    company: "Hemköp",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Hemk%C3%B6p_logo.svg/2560px-Hemk%C3%B6p_logo.svg.png",
+    title: "Presentkort från Hemköp",
+    text: "En uppskattad matbonus när du tecknar via Adeala.",
+    link: "signera.html"
+  },
+  {
+    company: "Specsavers",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Specsavers_logo.svg/2560px-Specsavers_logo.svg.png",
+    title: "Glasögonförmån hos Specsavers",
+    text: "Få rabatt på glasögon eller synundersökning vid utvalda abonnemang.",
+    link: "signera.html"
+  },
+  {
+    company: "Contacta",
+    logo: "https://contacta.se/wp-content/uploads/2021/04/Contacta_logo.png",
+    title: "Exklusiv Contacta-bonus",
+    text: "Ta del av en unik förmån från Contacta som ny kund hos Adeala.",
+    link: "signera.html"
+  },
+  {
+    company: "SATS",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/SATS_logo.svg/2560px-SATS_logo.svg.png",
+    title: "Träningsbonus hos SATS",
+    text: "Kickstarta träningen med en träningsförmån från SATS.",
+    link: "signera.html"
+  }
+];
 
     const container = document.getElementById("rewards-container");
     rewards.forEach(r => {
@@ -117,3 +164,4 @@
 
 </body>
 </html>
+
