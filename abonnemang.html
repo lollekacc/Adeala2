@@ -255,22 +255,25 @@ function renderOffers(offers) {
       checkGoToNumberStep();
     });
 
-    card.innerHTML = `
-      <div class="offer-bubble">${reward}:-</div>
+card.innerHTML = `
+  <button class="offer-bubble gift-btn" data-reward="${reward}">
+    ${reward}:-
+  </button>
 
-      <div>
-        <img src="${o.logo || 'assets/logo-placeholder.png'}"
-             class="h-16 mx-auto mb-4 object-contain">
-        <p class="text-sm text-gray-500 mb-1">${o.operator || ''}</p>
-        <h3 class="text-xl font-semibold mb-1 text-[#0C4A3C]">${o.title}</h3>
-        <p class="text-gray-600 text-sm mb-3">${o.text || ''}</p>
-        <p class="font-medium mb-1">${o.data || ''}</p>
-      </div>
+  <div>
+    <img src="${o.logo || 'assets/logo-placeholder.png'}"
+         class="h-16 mx-auto mb-4 object-contain">
+    <p class="text-sm text-gray-500 mb-1">${o.operator || ''}</p>
+    <h3 class="text-xl font-semibold mb-1 text-[#0C4A3C]">${o.title}</h3>
+    <p class="text-gray-600 text-sm mb-3">${o.text || ''}</p>
+    <p class="font-medium mb-1">${o.data || ''}</p>
+  </div>
 
-      <div>
-        <p class="font-semibold text-lg mb-4">${o.finalPrice} kr/mån</p>
-      </div>
-    `;
+  <div>
+    <p class="font-semibold text-lg mb-4">${o.finalPrice} kr/mån</p>
+  </div>
+`;
+
 
     offersContainer.appendChild(card);
   });
@@ -624,6 +627,7 @@ function calculateReward(price) {
   
 </body>
 </html>
+
 
 
 
