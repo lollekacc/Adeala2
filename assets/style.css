@@ -757,3 +757,51 @@ nav a:hover {
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   z-index: 20;
 }
+/* Rotating square behind modal */
+.rotating-square {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border: 3px solid transparent;
+  border-image: linear-gradient(45deg, #4bc0ff, #9b5cff, #00e1b0, #ff5cf1) 1;
+  border-radius: 12px;
+  animation: rotateSquare 12s linear infinite;
+  opacity: 0.5;
+  z-index: 0; /* BEHIND everything */
+}
+
+@keyframes rotateSquare {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Make images float smoothly */
+@keyframes floatSlow {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+.floating-slow { animation: floatSlow 4s ease-in-out infinite; }
+
+@keyframes floatFast {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+.floating-fast { animation: floatFast 3s ease-in-out infinite; }
+
+/* CTA pulse effect */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 10px rgba(0,255,150,0.4); }
+  50% { box-shadow: 0 0 25px rgba(0,255,150,0.8); }
+  100% { box-shadow: 0 0 10px rgba(0,255,150,0.4); }
+}
+.promo-cta {
+  background: linear-gradient(90deg, #00e1b0, #00c2ff);
+  animation: pulseGlow 2s infinite;
+}
+.promo-cta:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+  transition: 0.2s;
+}
