@@ -155,29 +155,8 @@
     Aktuella erbjudanden
   </h2>
 
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-[1800px] mx-auto">
+<div class="max-w-[1800px] mx-auto">
 
-    <!-- REWARD -->
-    <div id="rewardBox"
-         class="border rounded-2xl p-10 shadow bg-white flex flex-col text-center h-fit sticky top-10">
-
-      <p id="rewardValue" class="text-5xl font-extrabold text-[#004C9E] mb-2">1000:–</p>
-      <p class="text-lg font-semibold text-[#0C4A3C] mb-1">Grattis på ditt VärdeCheck</p>
-
-      <button id="beloningBtn"
-              class="w-full adeala-btn text-white text-lg font-semibold py-3 px-6 rounded-xl transition">
-        Välj din belöning
-      </button>
-
-      <div id="rewardContent" class="hidden"></div>
-    </div>
-
-    <!-- OFFERS -->
-    <div id="offers-container"
-         class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10"></div>
-
-  </div>
-</section>
 
 
 <!-- =======================
@@ -253,9 +232,12 @@ function renderOffers(offers) {
   const limited = offers.slice(0, 3);
 
   limited.forEach(o => {
+
+    const reward = calculateReward(o.finalPrice);
+
     const card = document.createElement("button");
     card.className =
-      "offer-choice text-left border rounded-2xl shadow bg-white p-6 flex flex-col justify-between cursor-pointer";
+      "relative offer-choice text-left border rounded-2xl shadow bg-white p-6 flex flex-col justify-between cursor-pointer transition hover:shadow-lg";
 
     card.dataset.choiceId = o.id || "";
 
@@ -264,30 +246,32 @@ function renderOffers(offers) {
         c.classList.remove("active")
       );
       card.classList.add("active");
-
       window.offerChosen = true;
+      window.beloningChosen = true; // belöning auto-selected
       checkGoToNumberStep();
     });
 
     card.innerHTML = `
+      <div class="offer-bubble">${reward}:-</div>
+
       <div>
         <img src="${o.logo || 'assets/logo-placeholder.png'}"
              class="h-16 mx-auto mb-4 object-contain">
         <p class="text-sm text-gray-500 mb-1">${o.operator || ''}</p>
-        <h3 class="text-xl font-semibold mb-1 text-[#0C4A3C]">${o.title || 'Erbjudande'}</h3>
+        <h3 class="text-xl font-semibold mb-1 text-[#0C4A3C]">${o.title}</h3>
         <p class="text-gray-600 text-sm mb-3">${o.text || ''}</p>
         <p class="font-medium mb-1">${o.data || ''}</p>
       </div>
+
       <div>
-        <p class="font-semibold text-lg mb-4">
-          ${o.finalPrice ? `${o.finalPrice} kr/mån` : 'Pris saknas'}
-        </p>
+        <p class="font-semibold text-lg mb-4">${o.finalPrice} kr/mån</p>
       </div>
     `;
 
     offersContainer.appendChild(card);
   });
 }
+
 
 document.getElementById("beloningBtn").onclick = () => {
   if (!document.querySelector(".offer-choice.active"))
@@ -632,12 +616,20 @@ const offerPrice = chosenOffer
 function checkGoToNumberStep() {
   if (window.offerChosen && window.beloningChosen) startNumberFlow();
 }
+function calculateReward(price) {
+  if (price < 299) return 200;
+  if (price < 399) return 400;
+  if (price < 499) return 600;
+  if (price < 699) return 800;
+  return 1000;
+}
 
 </script>
 
   
 </body>
 </html>
+
 
 
 
