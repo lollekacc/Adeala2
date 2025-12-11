@@ -743,3 +743,17 @@ nav a:hover {
   display: flex !important;
   z-index: 999999 !important;
 }
+
+.offer-bubble {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background: linear-gradient(90deg, #004C9E, #0C4A3C);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 20;
+}
