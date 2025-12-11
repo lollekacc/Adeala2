@@ -13,39 +13,55 @@
 
 <body class="min-h-screen font-[Inter] bg-white text-gray-900">
 <!-- POPUP MODAL -->
-<div id="promo-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center z-[9999]">
-  <div class="relative bg-white rounded-2xl shadow-2xl p-6 w-[90%] max-w-lg animate-scaleIn">
+<div id="promo-modal" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden flex items-center justify-center z-[9999]">
+  <div class="relative rounded-3xl p-8 w-[92%] max-w-xl animate-popup bg-white/10 border border-white/20 shadow-[0_0_40px_rgba(0,0,0,0.6)]">
+
+    <!-- Animated gradient ring -->
+    <div class="absolute inset-0 rounded-3xl border-2 border-transparent gradient-ring pointer-events-none"></div>
 
     <!-- Close Button -->
-    <button id="promo-close" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl">
+    <button id="promo-close" 
+            class="absolute top-4 right-5 text-white/80 hover:text-white text-3xl font-light">
       &times;
     </button>
 
-    <!-- Image Stack -->
-    <div class="relative w-full h-56 mb-6">
-      <img src="images/ps5.jpg" 
-           class="absolute top-0 left-0 w-40 rotate-[-8deg] drop-shadow-xl z-10">
+    <!-- Floating Product Images -->
+<!-- Floating Product Images (intertwined diagonally) -->
+<div class="relative w-full h-64 mb-6 flex justify-center items-center">
 
-      <img src="images/samsung-tv.jpg" 
-           class="absolute bottom-0 right-0 w-48 rotate-[3deg] drop-shadow-xl z-0">
-    </div>
+  <!-- Rotating square BEHIND the box -->
+  <div class="rotating-square"></div>
 
-    <!-- Text -->
-    <h2 class="text-2xl font-extrabold text-gray-900 mb-3">
-      Få Playstation 5 eller Samsung TV – på köpet?
+  <!-- PS5 top-left -->
+  <img src="images/ps5.jpg"
+       class="absolute w-40 drop-shadow-2xl floating-slow z-20"
+       style="top: 10px; left: 25%; transform: rotate(-10deg);">
+
+  <!-- TV bottom-right -->
+  <img src="images/samsung-tv.jpg"
+       class="absolute w-48 drop-shadow-2xl floating-fast z-10"
+       style="bottom: 0; right: 25%; transform: rotate(8deg);">
+
+</div>
+
+
+    <!-- Promo Text -->
+    <h2 class="text-3xl font-extrabold text-white text-center drop-shadow mb-3">
+      Playstation 5 eller Samsung TV på köpet?
     </h2>
 
-    <p class="text-gray-600 mb-6">
-      Just nu får du exklusiva erbjudande när du tecknar via Adeala.
+    <p class="text-white/90 text-center text-lg mb-8">
+      Missa inte våra exklusiva erbjudande när du tecknar via Adeala.
     </p>
 
-    <!-- CTA Button -->
+    <!-- Call To Action -->
     <a href="abonnemang.html"
-       class="adeala-btn w-full block text-center py-3 text-lg font-semibold">
+       class="promo-cta w-full block text-center py-4 text-xl font-semibold rounded-xl text-white">
        Utforska mer
     </a>
   </div>
 </div>
+
 
   <!-- Header Placeholder -->
   <div id="header-placeholder"></div>
@@ -251,6 +267,25 @@ document.addEventListener("DOMContentLoaded", () => {
   closeBtn.onclick = () => modal.classList.add("hidden");
 
   // Close when clicking outside box
+  modal.onclick = (e) => {
+    if (e.target === modal) modal.classList.add("hidden");
+  };
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("promo-modal");
+  const closeBtn = document.getElementById("promo-close");
+
+  // Show popup after slight delay for dramatic effect
+  setTimeout(() => {
+    modal.classList.remove("hidden");
+  }, 500);
+
+  // Close via X
+  closeBtn.onclick = () => modal.classList.add("hidden");
+
+  // Close when clicking outside popup
   modal.onclick = (e) => {
     if (e.target === modal) modal.classList.add("hidden");
   };
