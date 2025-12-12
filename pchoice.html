@@ -16,11 +16,8 @@
   <!-- HEADER -->
   <div id="header-placeholder"></div>
 
-  <!-- MAIN CONTENT -->
-  <!-- (your <main> stays here) -->
 
-  <!-- FOOTER -->
-  <div id="footer-placeholder"></div>
+
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("header-placeholder").innerHTML =
@@ -38,28 +35,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   <h1 class="text-4xl font-bold text-center mb-4">Välj dina belöningar</h1>
   <p class="text-center text-gray-600 mb-12">
-    Fördela din belöning mellan våra samarbetspartners (minst 100 kr per val).
+    Du kan fördela din belöning mellan våra samarbetspartners (minst 100 kr per val).
   </p>
 
   <!-- Calculator -->
   <div class="bg-white rounded-2xl p-6 mb-12 flex justify-between items-center shadow border">
-    <div>
-      <p class="text-sm text-gray-600">Totalt belöningsvärde</p>
-      <p class="text-xl font-bold"><span id="totalReward">0</span> kr</p>
-    </div>
-    <div>
-      <p class="text-sm text-gray-600">Valt hittills</p>
-      <p class="text-xl font-bold text-[#0C4A3C]">
-        <span id="selectedSum">0</span> kr
-      </p>
-    </div>
-    <div>
-      <p class="text-sm text-gray-600">Återstår</p>
-      <p class="text-xl font-bold text-red-600">
-        <span id="remainingSum">0</span> kr
-      </p>
-    </div>
+  <div>
+    <p class="text-sm text-gray-600">Totalt belöningsvärde</p>
+    <p class="text-xl font-bold">
+      <span id="totalReward">0</span> kr
+    </p>
   </div>
+
+  <div class="text-right">
+    <p class="text-sm text-gray-600">Återstår</p>
+    <p class="text-xl font-bold text-red-600">
+      <span id="remainingSum">0</span> kr
+    </p>
+  </div>
+</div>
+
 
   <!-- Rewards -->
   <div id="rewardGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"></div>
@@ -102,7 +97,6 @@ const TOTAL_REWARD = stored?.reward ? Number(stored.reward) : 1000;
    ELEMENTS
 ----------------------------- */
 const grid = document.getElementById("rewardGrid");
-const selectedEl = document.getElementById("selectedSum");
 const remainingEl = document.getElementById("remainingSum");
 const totalEl = document.getElementById("totalReward");
 const continueBtn = document.getElementById("continueBtn");
@@ -161,8 +155,10 @@ function updateTotals() {
   const selected = Object.values(selections).reduce((a, b) => a + b, 0);
   const remaining = TOTAL_REWARD - selected;
 
-  selectedEl.textContent = selected;
-  remainingEl.textContent = remaining;
+ remainingEl.textContent = remaining;
+remainingEl.parentElement.classList.toggle("text-red-600", remaining !== 0);
+remainingEl.parentElement.classList.toggle("text-[#0C4A3C]", remaining === 0);
+
 
   const valid =
     remaining === 0 &&
@@ -181,3 +177,5 @@ continueBtn.addEventListener("click", () => {
   window.location.href = "signera.html";
 });
 </script>
+  <!-- FOOTER -->
+  <div id="footer-placeholder"></div>
