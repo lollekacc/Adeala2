@@ -1,8 +1,38 @@
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adeala – Välj belöning</title>
 
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+
+<body class="font-[Inter] bg-white min-h-screen">
+
+  <!-- HEADER -->
+  <div id="header-placeholder"></div>
+
+  <!-- MAIN CONTENT -->
+  <!-- (your <main> stays here) -->
+
+  <!-- FOOTER -->
+  <div id="footer-placeholder"></div>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  document.getElementById("header-placeholder").innerHTML =
+    await fetch("partials/header.html").then(r => r.text());
+
+  document.getElementById("footer-placeholder").innerHTML =
+    await fetch("partials/footer.html").then(r => r.text());
+});
+</script>
+
+</body>
+</html>
 
 <main class="max-w-6xl mx-auto px-6 py-16">
 
@@ -48,18 +78,18 @@
    DATA (same companies as belöning.html)
 ----------------------------- */
 const rewards = [
-  { company: "ICA Maxi", logo: "..."},
-  { company: "Amazon", logo: "..."},
-  { company: "MIO", logo: "..."},
-  { company: "Coop", logo: "..."},
-  { company: "H&M", logo: "..."},
-  { company: "MQ", logo: "..."},
-  { company: "Guldfynd", logo: "..."},
-  { company: "Hemtex", logo: "..."},
-  { company: "Hemköp", logo: "..."},
-  { company: "Specsavers", logo: "..."},
-  { company: "Synsam", logo: "..."},
-  { company: "SATS", logo: "..."}
+  { company: "ICA Maxi", logo: "https://detailproduktion.se/wp-content/uploads/2014/04/ica-maxi-stormarknad-logo.png"},
+  { company: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1280px-Amazon_logo.svg.png"},
+  { company: "MIO", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/MIO_Logo.svg/2560px-MIO_Logo.svg.png"},
+  { company: "Coop", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Coop_logo.svg/2560px-Coop_logo.svg.png"},
+  { company: "H&M", logo: "https://upload.wikimedia.org/wikipedia/commons/5/53/H%26M-Logo.svg"},
+  { company: "MQ", logo: "https://www.kungsmassan.se/Images/Butiker/MQMARQET_1080x1080.png"},
+  { company: "Guldfynd", logo: "https://www.datocms-assets.com/138720/1732112442-guldfynd.png?auto=format&fit=max&w=1200"},
+  { company: "Hemtex", logo: "https://images.seeklogo.com/logo-png/32/1/hemtex-logo-png_seeklogo-329500.png"},
+  { company: "Hemköp", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Hemkop_logo.svg/1280px-Hemkop_logo.svg.png"},
+  { company: "Specsavers", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Specsavers_logo.svg/1200px-Specsavers_logo.svg.png"},
+  { company: "Synsam", logo: "https://kraftenifinspang.se/wp-content/uploads/2024/09/Loggor-centrumbutikerna_Synsam-1024x503.png"},
+  { company: "SATS", logo: "https://cdn.sanity.io/images/xkmfhygb/production/7a8c8bd647ab4949343baef3fe30dc92281489e7-1920x1080.jpg?w=1200&h=630&fit=crop&crop=focalpoint"}
 ];
 
 /* -----------------------------
