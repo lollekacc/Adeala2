@@ -29,66 +29,171 @@
     </div>
   </section>
 
-  <!-- OFFERS SECTION -->
-  <section id="offersSection" class="hidden mt-20 px-10 pb-20">
+  <!-- CATEGORY CARDS -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10 px-10">
+    <div class="adeala-card text-center">
+      <i class="fas fa-mobile-alt text-[#004C9E] text-5xl mb-6"></i>
+      <h3 class="text-2xl font-bold mb-4 text-[#0C4A3C]">Mobilabonnemang</h3>
+      <p class="mb-6 text-gray-700">För dig som vill ha ett personligt abonnemang med bäst täckning.</p>
+      <button id="startMobilQuiz" class="adeala-btn mt-4">Starta quiz</button>
+    </div>
+
+    <div class="adeala-card text-center">
+      <i class="fas fa-users text-[#004C9E] text-5xl mb-6"></i>
+      <h3 class="text-2xl font-bold mb-4 text-[#0C4A3C]">Familjeabonnemang</h3>
+      <p class="mb-6 text-gray-700">Perfekt för familjer som vill dela abonnemang och spara pengar.</p>
+      <button id="startFamiljQuiz" class="adeala-btn mt-4">Starta quiz</button>
+    </div>
+  </div>
+
+  <!-- =======================
+       MOBIL QUIZ
+  ======================= -->
+  <section id="mobilQuizSection" class="hidden mt-20 px-10 pb-20">
+
     <h2 class="text-center text-4xl font-bold text-[#0C4A3C] mb-14">
-      Aktuella erbjudanden
+      Hitta rätt mobilabonnemang
     </h2>
 
-    <div class="max-w-[1800px] mx-auto">
-      <div id="offers-container"
-           class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10"></div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 max-w-[1800px] mx-auto">
+
+      <div id="qMobil1" class="quiz-card flex flex-col">
+        <p class="quiz-title">Hur mycket surfar du per månad?</p>
+        <div class="flex flex-col gap-4">
+          <button class="quiz-option mobil-opt" data-answer="low">Lite (upp till 10 GB)</button>
+          <button class="quiz-option mobil-opt" data-answer="medium">Medel (10–50 GB)</button>
+          <button class="quiz-option mobil-opt" data-answer="high">Mycket (obegränsat)</button>
+        </div>
+      </div>
+
+      <div id="qMobil2" class="quiz-card flex flex-col">
+        <p class="quiz-title">Hur mycket vill du betala per månad?</p>
+        <div class="flex flex-col gap-4">
+          <button class="quiz-option mobil-opt" data-answer="249">Under 250 kr</button>
+          <button class="quiz-option mobil-opt" data-answer="349">Upp till 350 kr</button>
+          <button class="quiz-option mobil-opt" data-answer="449">Upp till 450 kr</button>
+          <button class="quiz-option mobil-opt" data-answer="999">Spelar ingen roll</button>
+        </div>
+      </div>
+
+      <div id="qMobil3" class="quiz-card flex flex-col">
+        <p class="quiz-title">Vilken operatör föredrar du?</p>
+        <div class="flex flex-col gap-4">
+          <button class="quiz-option mobil-opt" data-answer="">Ingen speciell</button>
+          <button class="quiz-option mobil-opt" data-answer="Telia">Telia</button>
+          <button class="quiz-option mobil-opt" data-answer="Tele2">Tele2</button>
+          <button class="quiz-option mobil-opt" data-answer="Telenor">Telenor</button>
+          <button class="quiz-option mobil-opt" data-answer="Tre">Tre</button>
+          <button class="quiz-option mobil-opt" data-answer="Halebop">Halebop</button>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- =======================
-       PCHOICE MODAL
+       FAMILJ QUIZ
   ======================= -->
-  <div id="pchoiceOverlay"
-       class="fixed inset-0 bg-black/60 hidden z-[9999] flex items-center justify-center">
+  <section id="familjQuizSection" class="hidden mt-20 px-10 pb-20">
 
-    <div id="pchoiceModal"
-         class="relative bg-white w-full max-w-5xl h-[90vh] rounded-2xl shadow-2xl overflow-hidden">
+    <h2 class="text-center text-4xl font-bold text-[#0C4A3C] mb-14">
+      Hitta rätt familjeabonnemang
+    </h2>
 
-      <div class="flex items-center justify-between px-6 py-4 border-b bg-white">
-        <h3 class="text-lg font-bold text-[#0C4A3C]">Välj dina belöningar</h3>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-16 max-w-[1800px] mx-auto">
 
-        <div class="flex gap-2">
-          <button id="minimizePchoice"
-                  class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-gray-200">—</button>
-          <button id="closePchoice"
-                  class="px-3 py-1 rounded-lg bg-red-100 hover:bg-red-200">✕</button>
+      <div id="qFam1" class="quiz-card flex flex-col">
+        <p class="quiz-title">Hur många personer i familjen?</p>
+        <div class="flex flex-col gap-4">
+          <button class="quiz-option familj-opt family-size" data-answer="2">2 personer</button>
+          <button class="quiz-option familj-opt family-size" data-answer="3">3 personer</button>
+          <button class="quiz-option familj-opt family-size" data-answer="4">4 personer</button>
+          <button class="quiz-option familj-opt family-size" data-answer="5">5 personer</button>
+          <button class="quiz-option familj-opt family-size" data-answer="6">6+ personer</button>
         </div>
       </div>
 
-      <iframe id="pchoiceFrame"
-              class="w-full h-full border-0"
-              loading="lazy"></iframe>
+      <div id="qFam2" class="quiz-card flex flex-col">
+        <p class="quiz-title">Hur mycket surf behövs per person?</p>
+        <div class="flex flex-col gap-4">
+          <button class="quiz-option familj-opt data-need" data-answer="low">Lite (10 GB)</button>
+          <button class="quiz-option familj-opt data-need" data-answer="medium">Lagom (30 GB)</button>
+          <button class="quiz-option familj-opt data-need" data-answer="high">Mycket (obegränsat)</button>
+        </div>
+      </div>
+
+      <div id="qFam3" class="quiz-card flex flex-col">
+        <p class="quiz-title">Ungefärlig månadsbudget</p>
+        <div class="flex flex-col gap-4">
+          <button class="quiz-option familj-opt price" data-answer="499">Upp till 500 kr</button>
+          <button class="quiz-option familj-opt price" data-answer="999">Upp till 1000 kr</button>
+          <button class="quiz-option familj-opt price" data-answer="1499">Upp till 1500 kr</button>
+          <button class="quiz-option familj-opt price" data-answer="1999">Upp till 2000 kr</button>
+          <button class="quiz-option familj-opt price" data-answer="99999">Spelar ingen roll</button>
+        </div>
+      </div>
+
+      <div id="qFam4" class="quiz-card flex flex-col">
+        <p class="quiz-title">Vilken operatör föredrar du?</p>
+        <div class="flex flex-col gap-4">
+          <button class="quiz-option familj-opt operator" data-answer="">Ingen speciell</button>
+          <button class="quiz-option familj-opt operator" data-answer="Telia">Telia</button>
+          <button class="quiz-option familj-opt operator" data-answer="Tele2">Tele2</button>
+          <button class="quiz-option familj-opt operator" data-answer="Telenor">Telenor</button>
+          <button class="quiz-option familj-opt operator" data-answer="Tre">Tre</button>
+          <button class="quiz-option familj-opt operator" data-answer="Halebop">Halebop</button>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <!-- =======================
+       OFFERS SECTION
+  ======================= -->
+
+<section id="offersSection" class="hidden mt-20 px-10 pb-20">
+  <h2 class="text-center text-4xl font-bold text-[#0C4A3C] mb-14">
+    Aktuella erbjudanden
+  </h2>
+
+<div class="max-w-[1800px] mx-auto">
+ <div id="offers-container"
+         class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10"></div>
+
   </div>
+</section>
+
+
+<!-- =======================
+     NUMBER FLOW SECTION
+======================= -->
+<section id="numberSection" class="hidden mt-20 px-10 pb-20">
+
+  <section id="portNumberSection" class="hidden mt-20 px-10 pb-20">
+    <h2 class="text-center text-3xl font-bold text-[#0C4A3C] mb-10">
+      Fyll i numren som ska flyttas
+    </h2>
+
+    <div id="phoneInputsContainer"
+         class="max-w-xl mx-auto flex flex-col gap-6"></div>
+
+    <button id="confirmNumbersBtn"
+            class="mt-10 adeala-btn w-full py-4 rounded-xl text-lg">
+      Bekräfta nummer
+    </button>
+  </section>
+
+</section>
+
+  <!-- =======================
+       JAVASCRIPT
+  ======================= -->
 
 <script type="module">
 
-/* ======================
-   MODAL HELPERS
-====================== */
-function openPchoice() {
-  const overlay = document.getElementById("pchoiceOverlay");
-  const frame = document.getElementById("pchoiceFrame");
-  frame.src = "pchoice.html";
-  overlay.classList.remove("hidden");
-}
 
-function closePchoice() {
-  const overlay = document.getElementById("pchoiceOverlay");
-  const frame = document.getElementById("pchoiceFrame");
-  overlay.classList.add("hidden");
-  frame.src = "";
-}
-
-/* ======================
-   DOM READY
-====================== */
+/******************************
+ LOAD HEADER + FOOTER
+******************************/
 document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("header-placeholder").innerHTML =
     await fetch("partials/header.html").then(r => r.text());
@@ -98,60 +203,438 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.body.insertAdjacentHTML("beforeend",
     await fetch("partials/footer.html").then(r => r.text()));
-
-  document.getElementById("closePchoice").onclick = closePchoice;
-  document.getElementById("minimizePchoice").onclick = () => {
-    const modal = document.getElementById("pchoiceModal");
-    modal.classList.toggle("h-[90vh]");
-    modal.classList.toggle("h-[64px]");
-  };
 });
 
-/* ======================
-   OFFER RENDER
-====================== */
+/******************************
+ QUIZ SECTIONS
+******************************/
+const mobilSection = document.getElementById("mobilQuizSection");
+const familjSection = document.getElementById("familjQuizSection");
+const offersSection = document.getElementById("offersSection");
 const offersContainer = document.getElementById("offers-container");
 
+/******************************
+ QUIZ SWITCH
+******************************/
+document.getElementById("startMobilQuiz").onclick = () => {
+  familjSection.classList.add("hidden");
+  mobilSection.classList.remove("hidden");
+  mobilSection.scrollIntoView({ behavior: "smooth" });
+};
+
+document.getElementById("startFamiljQuiz").onclick = () => {
+  mobilSection.classList.add("hidden");
+  familjSection.classList.remove("hidden");
+  familjSection.scrollIntoView({ behavior: "smooth" });
+};
+
+/******************************
+ OFFER RENDER
+******************************/
 function renderOffers(offers) {
   offersContainer.innerHTML = "";
+  const limited = offers.slice(0, 3);
 
-  offers.slice(0, 3).forEach(o => {
+  limited.forEach(o => {
+
     const reward = calculateReward(o.finalPrice);
 
     const card = document.createElement("button");
     card.className =
-      "relative offer-choice text-left border rounded-2xl shadow bg-white p-6 flex flex-col justify-between cursor-pointer";
+      "relative offer-choice text-left border rounded-2xl shadow bg-white p-6 flex flex-col justify-between cursor-pointer transition hover:shadow-lg";
 
-    card.innerHTML = `
-      <button class="reward-circle gift-btn"
-              data-reward="${reward}"
-              data-offer-id="${o.id}"
-              type="button">${reward}:-</button>
+    card.dataset.choiceId = o.id || "";
 
-      <div>
-        <img src="${o.logo}" class="h-16 mx-auto mb-4 object-contain">
-        <h3 class="text-xl font-semibold text-[#0C4A3C]">${o.title}</h3>
-        <p class="font-semibold text-lg">${o.finalPrice} kr/mån</p>
-      </div>
-    `;
-
-    const rewardBtn = card.querySelector(".gift-btn");
-    rewardBtn.addEventListener("click", e => {
-      e.stopPropagation();
-      localStorage.setItem("rewardChoice", JSON.stringify({
-        reward,
-        offerId: o.id || ""
-      }));
-      openPchoice();
+    card.addEventListener("click", () => {
+      document.querySelectorAll(".offer-choice").forEach(c =>
+        c.classList.remove("active")
+      );
+      card.classList.add("active");
+      window.offerChosen = true;
+      window.beloningChosen = true; // belöning auto-selected
+      checkGoToNumberStep();
     });
+
+card.innerHTML = `
+<button
+  class="reward-circle gift-btn"
+  data-reward="${reward}"
+  data-offer-id="${o.id}"
+  type="button">
+  ${reward}:-
+</button>
+
+  <div>
+    <img src="${o.logo || 'assets/logo-placeholder.png'}"
+         class="h-16 mx-auto mb-4 object-contain">
+    <p class="text-sm text-gray-500 mb-1">${o.operator || ''}</p>
+    <h3 class="text-xl font-semibold mb-1 text-[#0C4A3C]">${o.title}</h3>
+    <p class="text-gray-600 text-sm mb-3">${o.text || ''}</p>
+    <p class="font-medium mb-1">${o.data || ''}</p>
+  </div>
+
+  <div>
+    <p class="font-semibold text-lg mb-4">${o.finalPrice} kr/mån</p>
+  </div>
+`;
+const rewardBtn = card.querySelector(".gift-btn");
+
+rewardBtn.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent offer selection
+
+  const rewardValue = rewardBtn.dataset.reward;
+  const offerId = rewardBtn.dataset.offerId || "";
+
+  // Optional: persist data
+  localStorage.setItem("rewardChoice", JSON.stringify({
+    reward: rewardValue,
+    offerId: offerId
+  }));
+
+  window.location.href = "pchoice.html";
+});
+
+
 
     offersContainer.appendChild(card);
   });
 }
 
-/* ======================
-   REWARD LOGIC
-====================== */
+/******************************
+ BACKEND API CALL
+******************************/
+async function loadOffers(filters) {
+  try {
+    const res = await fetch("./data/plans.json?nocache=" + Date.now());
+    let offers = await res.json();
+
+    // 1. Filter by category
+    offers = offers.filter(plan => plan.category === filters.category);
+
+    // 2. Filter by operator
+    if (filters.preferredOperator) {
+      offers = offers.filter(plan => plan.operator === filters.preferredOperator);
+    }
+
+    // 3. Calculate final price
+    offers = offers.map(plan => {
+      let finalPrice = null;
+
+      if (!plan.isFamilyPlan) {
+        // Single user plan
+        finalPrice = plan.price;
+
+      } else if (plan.familyPriceType === "packaged") {
+        finalPrice = plan.prices[filters.peopleCount - 1] || null;
+
+      } else if (plan.familyPriceType === "addon") {
+        const extra = Math.max(filters.peopleCount - 1, 0);
+        finalPrice = plan.price + extra * plan.addonPrice;
+
+      } else if (plan.familyPriceType === "perPerson") {
+        finalPrice = plan.price * filters.peopleCount;
+      }
+
+      return { ...plan, finalPrice };
+    });
+
+    // 4. Budget filter (using calculated final price)
+    offers = offers.filter(p => p.finalPrice !== null && p.finalPrice <= filters.budget);
+
+    // 5. Surf need
+    offers = offers.filter(plan => {
+  const surf = plan.dataAmount;
+
+  if (filters.dataNeed === "low") {
+    return surf <= 10;
+  }
+
+  if (filters.dataNeed === "medium") {
+    return surf > 10 && surf <= 50;
+  }
+
+  if (filters.dataNeed === "high") {
+    return surf > 50;  // unlimited or large data plans
+  }
+
+  return true;
+});
+
+
+// 6. Sort by final price (cheapest first), then take top 3
+offers = offers
+  .sort((a, b) => a.finalPrice - b.finalPrice)
+  .slice(0, 3);
+
+
+    renderOffers(offers);
+
+  } catch (err) {
+    console.error(err);
+    renderOffers([]);
+  }
+
+  offersSection.classList.remove("hidden");
+  offersSection.scrollIntoView({ behavior: "smooth" });
+}
+
+
+function activateButton(btn) {
+  const card = btn.closest(".quiz-card");
+  card.querySelectorAll(".quiz-option").forEach(x => x.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+/******************************
+ MOBIL QUIZ LOGIC
+******************************/
+document.querySelectorAll('.mobil-opt').forEach(btn =>
+  btn.addEventListener('click', () => {
+    activateButton(btn);
+    checkMobil();
+  })
+);
+
+function checkMobil() {
+  const q1 = document.querySelector('#qMobil1 .active');
+  const q2 = document.querySelector('#qMobil2 .active');
+  const q3 = document.querySelector('#qMobil3 .active');
+
+  if (q1 && q2 && q3) {
+    loadOffers({
+      category: "mobil",
+      peopleCount: 1,
+      dataNeed: q1.dataset.answer,
+      budget: Number(q2.dataset.answer),
+      preferredOperator: q3.dataset.answer || null,
+      speedNeed: "high"
+    });
+  }
+}
+
+/******************************
+ FAMILJ QUIZ LOGIC
+******************************/
+document.querySelectorAll('.familj-opt').forEach(btn =>
+  btn.addEventListener('click', () => {
+    activateButton(btn);
+    checkFamilj();
+  })
+);
+
+function checkFamilj() {
+  const q1 = document.querySelector('#qFam1 .active');
+  const q2 = document.querySelector('#qFam2 .active');
+  const q3 = document.querySelector('#qFam3 .active');
+  const q4 = document.querySelector('#qFam4 .active');
+
+  if (q1 && q2 && q3 && q4) {
+    loadOffers({
+      category: "familj",
+      peopleCount: Number(q1.dataset.answer),
+      dataNeed: q2.dataset.answer,
+      budget: Number(q3.dataset.answer),
+      preferredOperator: q4.dataset.answer || null,
+      speedNeed: "high"
+    });
+  }
+}
+
+/******************************
+ NUMBER VALIDATION
+******************************/
+function isValidPhone(num) {
+  num = num.replace(/\s+/g, "");
+  return /^07\d{8}$/.test(num) || /^\+467\d{8}$/.test(num);
+}
+
+/******************************
+ STEP-BY-STEP NUMBER FLOW
+******************************/
+const sectionNumbers = document.getElementById("numberSection");
+const sectionPort = document.getElementById("portNumberSection");
+const questionTitle = document.querySelector("#portNumberSection h2");
+const phoneInputs = document.getElementById("phoneInputsContainer");
+const btnConfirm = document.getElementById("confirmNumbersBtn");
+
+let totalPeople = 1;
+let currentPerson = 1;
+let collectedNumbers = {};
+
+function getFamilySize() {
+  const active = document.querySelector("#qFam1 .active");
+  return active ? (active.dataset.answer === "6" ? 6 : Number(active.dataset.answer)) : 1;
+}
+
+function startNumberFlow() {
+  totalPeople = getFamilySize();
+  currentPerson = 1;
+  collectedNumbers = {};
+  sectionNumbers.classList.remove("hidden");
+  askNextPerson();
+}
+
+function askNextPerson() {
+  phoneInputs.innerHTML = "";
+  questionTitle.textContent = `Person ${currentPerson} – Hur vill du göra med numret?`;
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "flex flex-col gap-6 mt-10";
+
+  const btnMove = document.createElement("button");
+  btnMove.className = "adeala-btn py-4 text-lg";
+  btnMove.textContent = "Flytta hit numret";
+  btnMove.onclick = () => showNumberInput("port");
+
+  const btnNew = document.createElement("button");
+  btnNew.className = "adeala-btn py-4 text-lg";
+  btnNew.textContent = "Skaffa nytt nummer";
+  btnNew.onclick = () => showNumberInput("new");
+
+  wrapper.appendChild(btnMove);
+  wrapper.appendChild(btnNew);
+
+  phoneInputs.appendChild(wrapper);
+  sectionPort.classList.remove("hidden");
+}
+
+function showNumberInput(type) {
+  phoneInputs.innerHTML = "";
+
+  const label = document.createElement("label");
+  label.className = "font-semibold mb-2";
+  label.textContent =
+    type === "port"
+      ? `Person ${currentPerson} – skriv numret som ska flyttas`
+      : `Person ${currentPerson} – nytt nummer skapas automatiskt`;
+
+  const input = document.createElement("input");
+  input.className = "border p-3 rounded-xl w-full";
+  input.placeholder = type === "port" ? "07XXXXXXXX eller +467XXXXXXXX" : "";
+  input.readOnly = type === "new";  // ⭐ FIXEN
+
+  phoneInputs.appendChild(label);
+  phoneInputs.appendChild(input);
+
+  btnConfirm.classList.remove("hidden");
+  btnConfirm.textContent =
+    currentPerson < totalPeople ? "Nästa person" : "Slutför";
+
+  btnConfirm.onclick = () => {
+
+    if (type === "port") {
+      const num = input.value.trim();
+      if (!isValidPhone(num)) {
+        alert("Ange ett giltigt svenskt nummer: 07XXXXXXXX eller +467XXXXXXXX");
+        return;
+      }
+      collectedNumbers[`person_${currentPerson}`] = {
+        type: "port",
+        number: num
+      };
+    } else {
+      collectedNumbers[`person_${currentPerson}`] = {
+        type: "new",
+        number: "nytt nummer"
+      };
+    }
+
+    currentPerson++;
+
+    if (currentPerson <= totalPeople) askNextPerson();
+    else finishNumbers();
+  };
+}
+
+
+function finishNumbers() {
+  console.log("Alla nummer valda:", collectedNumbers);
+
+  questionTitle.textContent = "Sammanfattning";
+
+  // Hämta valt erbjudande
+const chosenOffer = document.querySelector(".offer-choice.active");
+
+const offerTitle = chosenOffer
+  ? chosenOffer.querySelector("h3").textContent
+  : "Okänt erbjudande";
+
+const offerOperator = chosenOffer
+  ? chosenOffer.querySelector("p.text-sm").textContent
+  : "";
+
+const offerLogo = chosenOffer
+  ? chosenOffer.querySelector("img").src
+  : "";
+
+const offerPrice = chosenOffer
+  ? chosenOffer.querySelector(".font-semibold.text-lg").textContent.trim()
+  : "";
+
+  let summaryHTML = `
+  <div class="p-6 bg-white rounded-2xl shadow text-left space-y-6">
+
+    <h3 class="text-2xl font-bold text-[#0C4A3C]">Valt erbjudande</h3>
+
+    <div class="flex items-center gap-4 mt-4">
+      <img src="${offerLogo}" class="h-12 w-12 object-contain rounded-md border" />
+      <div>
+        <p class="text-lg font-semibold">${offerTitle}</p>
+        <p class="text-gray-700 text-md">från ${offerOperator}</p>
+        <p class="text-[#0C4A3C] font-bold mt-1">${offerPrice}</p>
+      </div>
+    </div>
+
+    <h3 class="text-2xl font-bold text-[#0C4A3C] mt-6">Personer</h3>
+    <div class="space-y-4">
+  `;
+
+  Object.keys(collectedNumbers).forEach(key => {
+    const p = collectedNumbers[key];
+    summaryHTML += `
+      <div class="border p-4 rounded-xl bg-gray-50">
+        <p class="font-semibold">🧑 ${key.replace("person_", "Person ")}</p>
+        <p class="text-gray-700">
+          ${
+            p.type === "port"
+              ? `Flyttar nummer: <strong>${p.number}</strong>`
+              : `Får nytt nummer`
+          }
+        </p>
+      </div>
+    `;
+  });
+
+  summaryHTML += `
+      </div>
+
+      <button id="goToCheckout"
+        class="w-full adeala-btn mt-8 py-4 text-lg rounded-xl">
+        Fortsätt till signering
+      </button>
+
+    </div>
+  `;
+
+  phoneInputs.innerHTML = summaryHTML;
+
+  btnConfirm.classList.add("hidden");
+
+  // Click → next page
+  document.getElementById("goToCheckout").onclick = () => {
+    // Spara datan om du vill använda den på nästa sida:
+    // localStorage.setItem("summary", JSON.stringify(collectedNumbers));
+    window.location.href = "signera.html";
+  };
+}
+
+
+/******************************
+ CHECK IF READY FOR NUMBERS
+******************************/
+function checkGoToNumberStep() {
+  if (window.offerChosen && window.beloningChosen) startNumberFlow();
+}
 function calculateReward(price) {
   if (price < 299) return 200;
   if (price < 399) return 400;
@@ -162,5 +645,6 @@ function calculateReward(price) {
 
 </script>
 
+  
 </body>
 </html>
