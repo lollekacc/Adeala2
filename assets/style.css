@@ -886,6 +886,31 @@ nav a:hover {
 .offer-choice.active .reward-circle {
   background: linear-gradient(135deg, #0C4A3C, #009688);
 }
+/* ================================
+   REWARD SPLIT INPUT (Adeala)
+================================ */
+.reward-input {
+  background: #f7f7f7;
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.reward-input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #0C4A3C;
+  box-shadow: 0 0 0 3px rgba(12, 74, 60, 0.15);
+}
+
+.reward-input.border-red-500 {
+  border-color: #dc2626;
+  background: #fff5f5;
+}
+
 
 
 
