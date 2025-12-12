@@ -12,7 +12,7 @@
   </p>
 
   <!-- Calculator -->
-  <div class="bg-gray-100 rounded-2xl p-6 mb-12 flex justify-between items-center">
+  <div class="bg-white rounded-2xl p-6 mb-12 flex justify-between items-center shadow border">
     <div>
       <p class="text-sm text-gray-600">Totalt belöningsvärde</p>
       <p class="text-xl font-bold"><span id="totalReward">0</span> kr</p>
@@ -89,7 +89,7 @@ const selections = {};
 ----------------------------- */
 rewards.forEach(r => {
   const card = document.createElement("div");
-  card.className = "border rounded-2xl p-6 shadow bg-white";
+  card.className = "reward-card flex flex-col gap-4";
 
   card.innerHTML = `
     <img src="${r.logo}" class="h-12 mb-4 object-contain">
