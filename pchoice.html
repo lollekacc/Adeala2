@@ -1,0 +1,147 @@
+<main class="max-w-6xl mx-auto px-6 py-16">
+
+  <h1 class="text-4xl font-bold text-center mb-4">Välj dina belöningar</h1>
+  <p class="text-center text-gray-600 mb-12">
+    Fördela din belöning mellan våra samarbetspartners (minst 100 kr per val).
+  </p>
+
+  <!-- Calculator -->
+  <div class="bg-gray-100 rounded-2xl p-6 mb-12 flex justify-between items-center">
+    <div>
+      <p class="text-sm text-gray-600">Totalt belöningsvärde</p>
+      <p class="text-xl font-bold"><span id="totalReward">0</span> kr</p>
+    </div>
+    <div>
+      <p class="text-sm text-gray-600">Valt hittills</p>
+      <p class="text-xl font-bold text-[#0C4A3C]">
+        <span id="selectedSum">0</span> kr
+      </p>
+    </div>
+    <div>
+      <p class="text-sm text-gray-600">Återstår</p>
+      <p class="text-xl font-bold text-red-600">
+        <span id="remainingSum">0</span> kr
+      </p>
+    </div>
+  </div>
+
+  <!-- Rewards -->
+  <div id="rewardGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"></div>
+
+  <!-- Continue -->
+  <button
+    id="continueBtn"
+    disabled
+    class="mt-12 w-full adeala-btn py-5 text-lg rounded-xl opacity-50 cursor-not-allowed">
+    Fortsätt
+  </button>
+
+</main>
+<script>
+/* -----------------------------
+   DATA (same companies as belöning.html)
+----------------------------- */
+const rewards = [
+  { company: "ICA Maxi", logo: "..."},
+  { company: "Amazon", logo: "..."},
+  { company: "MIO", logo: "..."},
+  { company: "Coop", logo: "..."},
+  { company: "H&M", logo: "..."},
+  { company: "MQ", logo: "..."},
+  { company: "Guldfynd", logo: "..."},
+  { company: "Hemtex", logo: "..."},
+  { company: "Hemköp", logo: "..."},
+  { company: "Specsavers", logo: "..."},
+  { company: "Synsam", logo: "..."},
+  { company: "SATS", logo: "..."}
+];
+
+/* -----------------------------
+   TOTAL REWARD
+----------------------------- */
+const stored = JSON.parse(localStorage.getItem("rewardChoice"));
+const TOTAL_REWARD = stored?.reward ? Number(stored.reward) : 1000;
+
+/* -----------------------------
+   ELEMENTS
+----------------------------- */
+const grid = document.getElementById("rewardGrid");
+const selectedEl = document.getElementById("selectedSum");
+const remainingEl = document.getElementById("remainingSum");
+const totalEl = document.getElementById("totalReward");
+const continueBtn = document.getElementById("continueBtn");
+
+totalEl.textContent = TOTAL_REWARD;
+
+/* -----------------------------
+   STATE
+----------------------------- */
+const selections = {};
+
+/* -----------------------------
+   RENDER
+----------------------------- */
+rewards.forEach(r => {
+  const card = document.createElement("div");
+  card.className = "border rounded-2xl p-6 shadow bg-white";
+
+  card.innerHTML = `
+    <img src="${r.logo}" class="h-12 mb-4 object-contain">
+    <h3 class="font-semibold text-lg mb-2">${r.company}</h3>
+
+    <input
+      type="number"
+      min="0"
+      step="100"
+      placeholder="0"
+      class="reward-input border rounded-xl p-3 w-full"
+      data-company="${r.company}">
+  `;
+
+  grid.appendChild(card);
+});
+
+/* -----------------------------
+   CALCULATION
+----------------------------- */
+document.querySelectorAll(".reward-input").forEach(input => {
+  input.addEventListener("input", () => {
+    const company = input.dataset.company;
+    const value = Number(input.value) || 0;
+
+    if (value > 0 && value < 100) {
+      input.classList.add("border-red-500");
+      selections[company] = 0;
+    } else {
+      input.classList.remove("border-red-500");
+      selections[company] = value;
+    }
+
+    updateTotals();
+  });
+});
+
+function updateTotals() {
+  const selected = Object.values(selections).reduce((a, b) => a + b, 0);
+  const remaining = TOTAL_REWARD - selected;
+
+  selectedEl.textContent = selected;
+  remainingEl.textContent = remaining;
+
+  const valid =
+    remaining === 0 &&
+    Object.values(selections).every(v => v === 0 || v >= 100);
+
+  continueBtn.disabled = !valid;
+  continueBtn.classList.toggle("opacity-50", !valid);
+  continueBtn.classList.toggle("cursor-not-allowed", !valid);
+}
+
+/* -----------------------------
+   CONTINUE
+----------------------------- */
+continueBtn.addEventListener("click", () => {
+  localStorage.setItem("rewardDistribution", JSON.stringify(selections));
+  window.location.href = "signera.html";
+});
+</script>
