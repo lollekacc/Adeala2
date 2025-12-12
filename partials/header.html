@@ -1,12 +1,14 @@
 <!-- HEADER (Unified, Fixed Only for Top Row) -->
 <!-- HEADER (Unified, Fixed Only for Top Row) -->
-<header id="mainHeader"
-        class="fixed top-0 left-0 w-full backdrop-blur-sm bg-white/20 shadow-sm z-50 transition-all duration-300">
-
-  <div class="w-full flex items-center justify-between px-9 py-4">
+<header
+  id="mainHeader"
+  class="fixed top-0 left-0 w-full bg-white shadow-sm z-50 transition-all duration-300"
+>
+  <!-- Inner layout container -->
+  <div class="mx-auto max-w-7xl px-70 py flex items-center justify-between">
 
     <!-- LEFT: Privat / Företag / Fastighet -->
-    <div class="flex items-center gap-4 text-green-900 font-semibold text-sm">
+    <div class="flex items-center gap-1 text-sm font-semibold">
       <a href="#" class="hover:opacity-70 transition">Privat</a>
       <span>|</span>
       <a href="#" class="hover:opacity-70 transition">Företag</a>
@@ -15,37 +17,36 @@
     </div>
 
     <!-- CENTER: Logo -->
-    <a href="index.html" class="hover:opacity-80 transition block">
-      <img 
+    <a href="index.html" class="hover:opacity-80 transition">
+      <img
         src="images/Logo.png"
         alt="Adeala Logo"
-        class="h-20 w-auto center"
-      >
+        class="h-16 w-auto"
+      />
     </a>
 
     <!-- RIGHT: Navigation + Login -->
     <div class="flex items-center gap-8">
+      <nav class="hidden md:flex space-x-10 text-sm font-medium">
+        <a href="abonnemang.html" class="hover:opacity-70 transition">Abonnemang</a>
+        <a href="bredband.html" class="hover:opacity-70 transition">5G Bredband</a>
+        <a href="partner.html" class="hover:opacity-70 transition">Partner</a>
+        <a href="belöning.html" class="hover:opacity-70 transition">Belöning</a>
+        <a href="om-oss.html" class="hover:opacity-70 transition">Om oss</a>
+        <a href="kundservice.html" class="hover:opacity-70 transition">Kundservice</a>
+      </nav>
 
-<nav class="hidden md:flex space-x-8 text-lg font-medium">
-  <a href="/Adeala2/abonnemang.html" class="hover:opacity-70 transition">Abonnemang</a>
-  <a href="/Adeala2/bredband.html" class="hover:opacity-70 transition">5G Bredband</a>
-  <a href="/Adeala2/partner.html" class="hover:opacity-70 transition">Partner</a>
-  <a href="/Adeala2/belöning.html" class="hover:opacity-70 transition">Belöning</a>
-  <a href="/Adeala2/om-oss.html" class="hover:opacity-70 transition">Om oss</a>
-  <a href="/Adeala2/kundservice.html" class="hover:opacity-70 transition">Kundservice</a>
-</nav>
-
-
-<a href="/Adeala2/login.html" class="hover:opacity-70 transition">
-   <i class="fas fa-user text-2xl"></i>
-</a>
-
-
+      <a href="login.html" class="hover:opacity-70 transition">
+        <i class="fas fa-user text-2xl"></i>
+      </a>
     </div>
 
   </div>
 
+  <!-- Fade divider -->
+  <div class="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
 </header>
+
 
 
 <!-- Partner Bar (NO LONGER FIXED) -->
@@ -121,4 +122,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
-
