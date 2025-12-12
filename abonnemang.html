@@ -227,6 +227,41 @@ document.getElementById("startFamiljQuiz").onclick = () => {
   familjSection.classList.remove("hidden");
   familjSection.scrollIntoView({ behavior: "smooth" });
 };
+<!-- =======================
+     PCHOICE MODAL
+======================= -->
+<div id="pchoiceOverlay"
+     class="fixed inset-0 bg-black/60 hidden z-[9999] flex items-center justify-center">
+
+  <div id="pchoiceModal"
+       class="relative bg-white w-full max-w-5xl h-[90vh] rounded-2xl shadow-2xl overflow-hidden">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between px-6 py-4 border-b bg-white">
+      <h3 class="text-lg font-bold text-[#0C4A3C]">Välj dina belöningar</h3>
+
+      <div class="flex gap-2">
+        <button id="minimizePchoice"
+                class="px-3 py-1 rounded-lg bg-gray-100 hover:bg-gray-200">
+          —
+        </button>
+        <button id="closePchoice"
+                class="px-3 py-1 rounded-lg bg-red-100 hover:bg-red-200">
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <!-- IFRAME -->
+    <iframe
+      id="pchoiceFrame"
+      src=""
+      class="w-full h-full border-0"
+      loading="lazy">
+    </iframe>
+
+  </div>
+</div>
 
 /******************************
  OFFER RENDER
@@ -262,6 +297,7 @@ card.innerHTML = `
   data-offer-id="${o.id}"
   type="button">
   ${reward}:-
+  
 </button>
 
   <div>
@@ -278,6 +314,10 @@ card.innerHTML = `
   </div>
 `;
 const rewardBtn = card.querySelector(".gift-btn");
+rewardBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  openPchoice();
+});
 
 rewardBtn.addEventListener("click", (e) => {
   e.stopPropagation(); // prevent offer selection
@@ -291,7 +331,14 @@ rewardBtn.addEventListener("click", (e) => {
     offerId: offerId
   }));
 
-  window.location.href = "pchoice.html";
+  function openPchoice() {
+  const overlay = document.getElementById("pchoiceOverlay");
+  const frame = document.getElementById("pchoiceFrame");
+
+  frame.src = "pchoice.html"; // load once
+  overlay.classList.remove("hidden");
+}
+
 });
 
 
@@ -546,6 +593,18 @@ function showNumberInput(type) {
   };
 }
 
+const overlay = document.getElementById("pchoiceOverlay");
+const modal = document.getElementById("pchoiceModal");
+
+document.getElementById("closePchoice").onclick = () => {
+  overlay.classList.add("hidden");
+  document.getElementById("pchoiceFrame").src = "";
+};
+
+document.getElementById("minimizePchoice").onclick = () => {
+  modal.classList.toggle("h-[90vh]");
+  modal.classList.toggle("h-[64px]");
+};
 
 function finishNumbers() {
   console.log("Alla nummer valda:", collectedNumbers);
@@ -648,3 +707,4 @@ function calculateReward(price) {
   
 </body>
 </html>
+
