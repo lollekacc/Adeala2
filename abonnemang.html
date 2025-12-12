@@ -256,9 +256,13 @@ function renderOffers(offers) {
     });
 
 card.innerHTML = `
-  <button class="reward-circle gift-btn" data-reward="${reward}">
-    ${reward}:-
-  </button>
+<button
+  class="reward-circle gift-btn"
+  data-reward="${reward}"
+  data-offer-id="${o.id}"
+  type="button">
+  ${reward}:-
+</button>
 
   <div>
     <img src="${o.logo || 'assets/logo-placeholder.png'}"
@@ -273,6 +277,22 @@ card.innerHTML = `
     <p class="font-semibold text-lg mb-4">${o.finalPrice} kr/mån</p>
   </div>
 `;
+const rewardBtn = card.querySelector(".gift-btn");
+
+rewardBtn.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent offer selection
+
+  const rewardValue = rewardBtn.dataset.reward;
+  const offerId = rewardBtn.dataset.offerId || "";
+
+  // Optional: persist data
+  localStorage.setItem("rewardChoice", JSON.stringify({
+    reward: rewardValue,
+    offerId: offerId
+  }));
+
+  window.location.href = "pchoice.html";
+});
 
 
 
@@ -628,12 +648,3 @@ function calculateReward(price) {
   
 </body>
 </html>
-
-
-
-
-
-
-
-
-
