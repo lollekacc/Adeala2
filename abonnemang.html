@@ -191,7 +191,8 @@
 <script type="module">
 
 document.addEventListener("DOMContentLoaded", () => {
-  const operator = sessionStorage.getItem("preferredOperator");
+  const params = new URLSearchParams(window.location.search);
+  const operator = params.get("op");
   if (!operator) return;
 
   mobilSection.classList.add("hidden");
@@ -206,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
     speedNeed: "high"
   });
 
-  sessionStorage.removeItem("preferredOperator");
+  
 });
 
 /******************************
@@ -325,10 +326,14 @@ async function loadOffers(filters) {
   const operatorMode = !!filters.preferredOperator;
   try {
     const res = await fetch("./data/plans.json?nocache=" + Date.now());
-    let offers = await res.json();
+    const allPlans = await res.json();
+let offers = [...allPlans];
+
 
     // 1. Filter by category
-    offers = offers.filter(plan => plan.category === filters.category);
+    if (!operatorMode) {
+  offers = offers.filter(plan => plan.category === filters.category);
+}
 
     // 2. Filter by operator
     if (filters.preferredOperator) {
@@ -373,26 +378,31 @@ if (!operatorMode) {
   });
 }
 
+let familyAddon = null;
 
-
-// 6. Sort by final price (cheapest first), then take top 3
 if (operatorMode) {
-  const low = offers.find(o => o.dataAmount <= 10);
-  const medium = offers.find(o => o.dataAmount > 10 && o.dataAmount <= 50);
-  const unlimited = offers.find(o => o.dataAmount > 50);
-
-  const familyAddon = offers.find(o =>
-    o.isFamilyPlan && o.familyPriceType === "addon"
+  familyAddon = allPlans.find(o =>
+    o.isFamilyPlan &&
+    o.familyPriceType === "addon" &&
+    o.operator === filters.preferredOperator
   );
+}
+
+
+
+// 6. Final selection
+if (operatorMode) {
+  const low = offers.find(o => o.dataAmount <= 10 && !o.isFamilyPlan);
+  const medium = offers.find(o => o.dataAmount > 10 && o.dataAmount <= 50 && !o.isFamilyPlan);
+  const unlimited = offers.find(o => o.dataAmount > 50 && !o.isFamilyPlan);
 
   offers = [low, medium, unlimited, familyAddon].filter(Boolean);
-
 } else {
-  // ORIGINAL quiz behavior (unchanged)
   offers = offers
     .sort((a, b) => a.finalPrice - b.finalPrice)
     .slice(0, 6);
 }
+
 
 
 
@@ -671,23 +681,7 @@ function calculateReward(price) {
   if (price < 699) return 800;
   return 1000;
 }
-document.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  const operator = params.get("op");
-  if (!operator) return;
 
-  mobilSection.classList.add("hidden");
-  familjSection.classList.add("hidden");
-
-  loadOffers({
-    category: "mobil",
-    peopleCount: 1,
-    dataNeed: "high",
-    budget: 99999,
-    preferredOperator: operator,
-    speedNeed: "high"
-  });
-});
 
 </script>
 
