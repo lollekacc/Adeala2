@@ -190,6 +190,24 @@
 
 <script type="module">
 
+document.addEventListener("DOMContentLoaded", () => {
+  const operator = sessionStorage.getItem("preferredOperator");
+  if (!operator) return;
+
+  mobilSection.classList.add("hidden");
+  familjSection.classList.add("hidden");
+
+  loadOffers({
+    category: "mobil",
+    peopleCount: 1,
+    dataNeed: "high",
+    budget: 99999,
+    preferredOperator: operator,
+    speedNeed: "high"
+  });
+
+  sessionStorage.removeItem("preferredOperator");
+});
 
 /******************************
  LOAD HEADER + FOOTER
@@ -233,7 +251,7 @@ document.getElementById("startFamiljQuiz").onclick = () => {
 ******************************/
 function renderOffers(offers) {
   offersContainer.innerHTML = "";
-  const limited = offers.slice(0, 3);
+  const limited = offers.slice(0, 6);
 
   limited.forEach(o => {
 
@@ -304,6 +322,7 @@ rewardBtn.addEventListener("click", (e) => {
  BACKEND API CALL
 ******************************/
 async function loadOffers(filters) {
+  const operatorMode = !!filters.preferredOperator;
   try {
     const res = await fetch("./data/plans.json?nocache=" + Date.now());
     let offers = await res.json();
@@ -341,30 +360,40 @@ async function loadOffers(filters) {
     // 4. Budget filter (using calculated final price)
     offers = offers.filter(p => p.finalPrice !== null && p.finalPrice <= filters.budget);
 
-    // 5. Surf need
-    offers = offers.filter(plan => {
-  const surf = plan.dataAmount;
+// 5. Surf need (quiz only)
+if (!operatorMode) {
+  offers = offers.filter(plan => {
+    const surf = plan.dataAmount;
 
-  if (filters.dataNeed === "low") {
-    return surf <= 10;
-  }
+    if (filters.dataNeed === "low") return surf <= 10;
+    if (filters.dataNeed === "medium") return surf > 10 && surf <= 50;
+    if (filters.dataNeed === "high") return surf > 50;
 
-  if (filters.dataNeed === "medium") {
-    return surf > 10 && surf <= 50;
-  }
+    return true;
+  });
+}
 
-  if (filters.dataNeed === "high") {
-    return surf > 50;  // unlimited or large data plans
-  }
-
-  return true;
-});
 
 
 // 6. Sort by final price (cheapest first), then take top 3
-offers = offers
-  .sort((a, b) => a.finalPrice - b.finalPrice)
-  .slice(0, 3);
+if (operatorMode) {
+  const low = offers.find(o => o.dataAmount <= 10);
+  const medium = offers.find(o => o.dataAmount > 10 && o.dataAmount <= 50);
+  const unlimited = offers.find(o => o.dataAmount > 50);
+
+  const familyAddon = offers.find(o =>
+    o.isFamilyPlan && o.familyPriceType === "addon"
+  );
+
+  offers = [low, medium, unlimited, familyAddon].filter(Boolean);
+
+} else {
+  // ORIGINAL quiz behavior (unchanged)
+  offers = offers
+    .sort((a, b) => a.finalPrice - b.finalPrice)
+    .slice(0, 6);
+}
+
 
 
     renderOffers(offers);
@@ -642,6 +671,23 @@ function calculateReward(price) {
   if (price < 699) return 800;
   return 1000;
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const operator = params.get("op");
+  if (!operator) return;
+
+  mobilSection.classList.add("hidden");
+  familjSection.classList.add("hidden");
+
+  loadOffers({
+    category: "mobil",
+    peopleCount: 1,
+    dataNeed: "high",
+    budget: 99999,
+    preferredOperator: operator,
+    speedNeed: "high"
+  });
+});
 
 </script>
 
