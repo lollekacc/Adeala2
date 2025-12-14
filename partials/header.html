@@ -108,6 +108,11 @@
 
 <!-- Shrink on Scroll Script (Fixed with DOMContentLoaded) -->
 <script>
+  function getOperatorFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("op");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   
   const wrappers = document.querySelectorAll(".partner-wrapper");
@@ -121,4 +126,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const operator = getOperatorFromURL();
+  if (operator) {
+    sessionStorage.setItem("preferredOperator", operator);
+  }
+});
+
+
 </script>
