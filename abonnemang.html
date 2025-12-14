@@ -190,26 +190,6 @@
 
 <script type="module">
 
-document.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  const operator = params.get("op");
-  if (!operator) return;
-
-  mobilSection.classList.add("hidden");
-  familjSection.classList.add("hidden");
-
-  loadOffers({
-    category: "mobil",
-    peopleCount: 1,
-    dataNeed: "high",
-    budget: 99999,
-    preferredOperator: operator,
-    speedNeed: "high"
-  });
-
-  
-});
-
 /******************************
  LOAD HEADER + FOOTER
 ******************************/
@@ -232,19 +212,46 @@ const familjSection = document.getElementById("familjQuizSection");
 const offersSection = document.getElementById("offersSection");
 const offersContainer = document.getElementById("offers-container");
 
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const operator = params.get("op");
+  if (!operator) return;
+
+  mobilSection.classList.add("hidden");
+  familjSection.classList.add("hidden");
+
+  loadOffers({
+    category: "mobil",
+    peopleCount: 1,
+    dataNeed: "high",
+    budget: 99999,
+    preferredOperator: operator,
+    speedNeed: "high"
+  });
+});
+
 /******************************
  QUIZ SWITCH
 ******************************/
 document.getElementById("startMobilQuiz").onclick = () => {
+  window.currentFlow = "mobil";
+
+  // RESET number flow
+  window.offerChosen = false;
+  window.beloningChosen = false;
+  document.getElementById("numberSection").classList.add("hidden");
+  document.getElementById("portNumberSection").classList.add("hidden");
+
   familjSection.classList.add("hidden");
   mobilSection.classList.remove("hidden");
-  mobilSection.scrollIntoView({ behavior: "smooth" });
 };
 
+
+
 document.getElementById("startFamiljQuiz").onclick = () => {
+  window.currentFlow = "familj";
   mobilSection.classList.add("hidden");
   familjSection.classList.remove("hidden");
-  familjSection.scrollIntoView({ behavior: "smooth" });
 };
 
 /******************************
@@ -258,7 +265,7 @@ function renderOffers(offers) {
 
     const reward = calculateReward(o.finalPrice);
 
-    const card = document.createElement("button");
+    const card = document.createElement("div");
     card.className =
       "relative offer-choice text-left border rounded-2xl shadow bg-white p-6 flex flex-col justify-between cursor-pointer transition hover:shadow-lg";
 
@@ -318,7 +325,118 @@ rewardBtn.addEventListener("click", (e) => {
     offersContainer.appendChild(card);
   });
 }
+function renderFamilyOffers(offers) {
+  offersContainer.innerHTML = "";
 
+  if (!offers.length) {
+    offersContainer.innerHTML = `
+      <p class="text-center text-gray-500 col-span-full">
+        Inga abonnemang matchar dina val.
+      </p>`;
+    offersSection.classList.remove("hidden");
+    return;
+  }
+
+  offers.slice(0, 6).forEach(o => {
+    const card = document.createElement("div");
+    card.className =
+      "offer-choice border rounded-2xl shadow bg-white p-6 flex flex-col cursor-pointer";
+
+
+    card.innerHTML = `
+      <img src="${o.logo}" class="h-14 mb-4 object-contain">
+      <p class="text-sm text-gray-500">${o.operator}</p>
+
+      <h3 class="text-xl font-semibold text-[#0C4A3C]">
+        ${o.title}
+      </h3>
+
+      <p class="mt-2 text-gray-700">
+        ${o.data} • ${o.peopleCount} personer
+      </p>
+
+      <p class="mt-4 text-2xl font-bold text-[#0C4A3C]">
+        ${o.pricePerPerson} kr / person
+      </p>
+
+      <p class="text-sm text-gray-500 mt-1">
+        ${o.totalPrice} kr/mån totalt
+      </p>
+    `;
+
+    offersContainer.appendChild(card);
+        card.addEventListener("click", () => {
+      document.querySelectorAll(".offer-choice")
+        .forEach(c => c.classList.remove("active"));
+
+    card.classList.add("active");
+    window.offerChosen = true;
+    window.beloningChosen = true;
+    checkGoToNumberStep();
+    });
+  });
+
+
+  offersSection.classList.remove("hidden");
+  offersSection.scrollIntoView({ behavior: "smooth" });
+}
+function getFamilyOffers(allPlans, filters) {
+  const { peopleCount, dataNeed, preferredOperator } = filters;
+
+  // 1. Group by operator
+  const operators = [...new Set(allPlans.map(p => p.operator))];
+
+  let results = [];
+
+  for (const operator of operators) {
+
+    if (preferredOperator && operator !== preferredOperator) continue;
+
+    const basePlans = allPlans.filter(p =>
+      p.operator === operator &&
+      !p.isFamilyPlan
+    );
+
+    const addon = allPlans.find(p =>
+      p.operator === operator &&
+      p.isFamilyPlan &&
+      p.familyPriceType === "addon"
+    );
+
+    if (!addon) continue; // operator does not support family
+
+    for (const base of basePlans) {
+
+      // 2. Match data need
+      if (dataNeed === "low" && base.dataAmount > 10) continue;
+      if (dataNeed === "medium" && (base.dataAmount <= 10 || base.dataAmount > 50)) continue;
+      if (dataNeed === "high" && base.dataAmount <= 50) continue;
+
+      // 3. Calculate price
+      const totalPrice =
+        base.price + (peopleCount - 1) * addon.addonPrice;
+
+      const perPerson =
+        Math.round(totalPrice / peopleCount);
+      // Budget = TOTAL household budget
+      if (totalPrice > filters.budget) continue;
+
+      results.push({
+        operator,
+        title: base.title,
+        data: base.data,
+        peopleCount,
+        totalPrice,
+        pricePerPerson: perPerson,
+        logo: base.logo,
+        text: `${peopleCount} personer • ${perPerson} kr/person`
+      });
+    }
+  }
+
+  // 4. Sort best value first
+  return results.sort((a, b) => a.pricePerPerson - b.pricePerPerson);
+}
 /******************************
  BACKEND API CALL
 ******************************/
@@ -327,43 +445,83 @@ async function loadOffers(filters) {
   try {
     const res = await fetch("./data/plans.json?nocache=" + Date.now());
     const allPlans = await res.json();
+    const operatorMode = !!filters.preferredOperator;
 let offers = [...allPlans];
+// =====================
+// OPERATOR MODE (LOGO CLICK)
+// =====================
+if (operatorMode && filters.category === "mobil") {
 
+  // 1. Only this operator
+  let operatorPlans = allPlans.filter(p =>
+    p.operator === filters.preferredOperator
+  );
 
-    // 1. Filter by category
-    if (!operatorMode) {
-  offers = offers.filter(plan => plan.category === filters.category);
+  // 2. Separate plans
+  const singlePlans = operatorPlans.filter(p => !p.isFamilyPlan);
+  const familyAddon = operatorPlans.find(p =>
+    p.isFamilyPlan && p.familyPriceType === "addon"
+  );
+
+  // 3. Pick ONE per tier
+  const low = singlePlans.find(p => p.dataAmount <= 10);
+  const medium = singlePlans.find(p => p.dataAmount > 10 && p.dataAmount <= 50);
+  const high = singlePlans.find(p => p.dataAmount > 50);
+
+  // 4. Calculate finalPrice
+  const result = [low, medium, high, familyAddon]
+    .filter(Boolean)
+    .map(p => ({
+      ...p,
+      finalPrice: p.price
+    }));
+
+  renderOffers(result);
+  offersSection.classList.remove("hidden");
+  offersSection.scrollIntoView({ behavior: "smooth" });
+
+  return; // ⛔ VERY IMPORTANT
 }
 
-    // 2. Filter by operator
-    if (filters.preferredOperator) {
-      offers = offers.filter(plan => plan.operator === filters.preferredOperator);
-    }
+// =====================
+// FAMILY QUIZ HANDLER
+// =====================
+if (filters.category === "familj") {
+  const familyOffers = getFamilyOffers(allPlans, filters);
+  renderFamilyOffers(familyOffers);
+  return; // ⛔ STOP old logic
+  
+}
+// 1. category filter
+offers = offers.filter(plan => plan.category === "mobil");
 
-    // 3. Calculate final price
-    offers = offers.map(plan => {
-      let finalPrice = null;
+// 2. operator filter
+if (filters.preferredOperator) {
+  offers = offers.filter(plan => plan.operator === filters.preferredOperator);
+}
 
-      if (!plan.isFamilyPlan) {
-        // Single user plan
-        finalPrice = plan.price;
+// 3. calculate finalPrice
+offers = offers.map(plan => ({
+  ...plan,
+  finalPrice: plan.price
+}));
 
-      } else if (plan.familyPriceType === "packaged") {
-        finalPrice = plan.prices[filters.peopleCount - 1] || null;
+// 4. budget filter
+offers = offers.filter(p => p.finalPrice <= filters.budget);
 
-      } else if (plan.familyPriceType === "addon") {
-        const extra = Math.max(filters.peopleCount - 1, 0);
-        finalPrice = plan.price + extra * plan.addonPrice;
+// 5. surf filter
+offers = offers.filter(plan => {
+  const surf = plan.dataAmount;
+  if (filters.dataNeed === "low") return surf <= 10;
+  if (filters.dataNeed === "medium") return surf > 10 && surf <= 50;
+  if (filters.dataNeed === "high") return surf > 50;
+  return true;
+});
 
-      } else if (plan.familyPriceType === "perPerson") {
-        finalPrice = plan.price * filters.peopleCount;
-      }
-
-      return { ...plan, finalPrice };
-    });
-
-    // 4. Budget filter (using calculated final price)
-    offers = offers.filter(p => p.finalPrice !== null && p.finalPrice <= filters.budget);
+// 6. sort + limit
+offers = offers
+  .sort((a, b) => a.finalPrice - b.finalPrice)
+  .slice(0, 6);
 
 // 5. Surf need (quiz only)
 if (!operatorMode) {
@@ -378,30 +536,15 @@ if (!operatorMode) {
   });
 }
 
-let familyAddon = null;
-
-if (operatorMode) {
-  familyAddon = allPlans.find(o =>
-    o.isFamilyPlan &&
-    o.familyPriceType === "addon" &&
-    o.operator === filters.preferredOperator
-  );
-}
-
-
 
 // 6. Final selection
 if (operatorMode) {
-  const low = offers.find(o => o.dataAmount <= 10 && !o.isFamilyPlan);
-  const medium = offers.find(o => o.dataAmount > 10 && o.dataAmount <= 50 && !o.isFamilyPlan);
-  const unlimited = offers.find(o => o.dataAmount > 50 && !o.isFamilyPlan);
-
-  offers = [low, medium, unlimited, familyAddon].filter(Boolean);
-} else {
   offers = offers
+    .filter(o => !o.isFamilyPlan)
     .sort((a, b) => a.finalPrice - b.finalPrice)
     .slice(0, 6);
 }
+
 
 
 
@@ -672,8 +815,12 @@ const offerPrice = chosenOffer
  CHECK IF READY FOR NUMBERS
 ******************************/
 function checkGoToNumberStep() {
-  if (window.offerChosen && window.beloningChosen) startNumberFlow();
+  if (!window.offerChosen || !window.beloningChosen) return;
+
+  startNumberFlow(); // ✅ always go to number step
 }
+
+
 function calculateReward(price) {
   if (price < 299) return 200;
   if (price < 399) return 400;
