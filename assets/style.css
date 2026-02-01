@@ -910,6 +910,15 @@ nav a:hover {
   border-color: #dc2626;
   background: #fff5f5;
 }
+/* Hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 
 
 
