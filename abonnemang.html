@@ -880,8 +880,35 @@ function goToSlide(i) {
   slider.scrollTo({ left: slider.clientWidth * i, behavior: "smooth" });
 }
 </script>
+<script>
+const slider = document.getElementById("heroSlider");
+let currentSlide = 0;
+const totalSlides = slider.children.length;
+const AUTO_INTERVAL = 6000; // 6 seconds
+
+function goToSlide(i) {
+  currentSlide = i;
+  slider.scrollTo({
+    left: slider.clientWidth * currentSlide,
+    behavior: "smooth"
+  });
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % totalSlides;
+  goToSlide(currentSlide);
+}
+
+function scrollHero(dir) {
+  currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+  goToSlide(currentSlide);
+}
+
+setInterval(nextSlide, AUTO_INTERVAL);
+</script>
 
   
 </body>
 </html>
+
 
