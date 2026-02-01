@@ -871,20 +871,9 @@ function calculateReward(price) {
 </script>
 <script>
 const slider = document.getElementById("heroSlider");
-
-function scrollHero(dir) {
-  slider.scrollBy({ left: slider.clientWidth * dir, behavior: "smooth" });
-}
-
-function goToSlide(i) {
-  slider.scrollTo({ left: slider.clientWidth * i, behavior: "smooth" });
-}
-</script>
-<script>
-const slider = document.getElementById("heroSlider");
 let currentSlide = 0;
 const totalSlides = slider.children.length;
-const AUTO_INTERVAL = 6000; // 6 seconds
+const AUTO_INTERVAL = 6000;
 
 function goToSlide(i) {
   currentSlide = i;
@@ -907,8 +896,8 @@ function scrollHero(dir) {
 setInterval(nextSlide, AUTO_INTERVAL);
 </script>
 
-  
 </body>
 </html>
+
 
 
